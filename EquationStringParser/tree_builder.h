@@ -38,6 +38,7 @@ class tree_builder
 private:
 	expression *manager;
 	binary_tree tree;
+	double x, y, z;
 	
 public:
 	tree_builder(expression *table = nullptr) : manager(table)
@@ -45,7 +46,7 @@ public:
 		srand((unsigned)time(0));
 	}
 
-	void generate_random_tree(int numberOfLevels, std::string mathOperators)
+	void generate_random_tree(int numberOfLevels, std::string mathOperators, std::string supportedVariables = std::string(""))
 	{
 		//select operator random from mathOperators
 		int idx = rand() % mathOperators.length();
@@ -55,7 +56,7 @@ public:
 
 		tree.nodes.push_back(n);
 
-		createLeftRightNodes(numberOfLevels - 1, mathOperators, n);
+		createLeftRightNodes(numberOfLevels - 1, mathOperators, n, supportedVariables);
 	}
 
 	double randomDouble(double fMin, double fMax)
@@ -64,16 +65,50 @@ public:
 		return fMin + f * (fMax - fMin);
 	}
 
-	void createLeftRightNodes(int numberOfLevels, std::string operators, node *n)
+	int getrand(size_t max)
+	{
+		return rand() % max;
+
+	}
+
+	void createLeftRightNodes(int numberOfLevels, std::string operators, node *n, std::string supportedVariables)
 	{
 		if (numberOfLevels == 0)
 		{
-			double l = randomDouble(-100.0, 100.0);
-			n->left = new node(std::to_string(l));
-			tree.nodes.push_back(n->left);
-			double r = randomDouble(-100.0, 100.0);
-			n->right = new node(std::to_string(r));
-			tree.nodes.push_back(n->right);
+			bool useVar = getrand(2) == 0;
+
+			if (useVar && supportedVariables.size() > 0)
+			{
+				int idx = getrand(supportedVariables.size());
+				n->left = new node(supportedVariables.substr(idx,1));
+				tree.nodes.push_back(n->left);
+
+			}
+			else
+			{
+				double l = randomDouble(-100.0, 100.0);
+				n->left = new node(std::to_string(l));
+				tree.nodes.push_back(n->left);
+			}
+
+			useVar = useVar ? false : getrand(2) == 0;
+
+			if (useVar && supportedVariables.size() > 0)
+			{
+				int idx = getrand(supportedVariables.size());
+				n->right = new node(supportedVariables.substr(idx, 1));
+				tree.nodes.push_back(n->right);
+
+			}
+			else
+			{
+				double r = randomDouble(-100.0, 100.0);
+				n->right = new node(std::to_string(r));
+				tree.nodes.push_back(n->right);
+			}
+
+			
+			
 		}
 		else
 		{
@@ -89,8 +124,8 @@ public:
 			n->right = new node(operR);
 			tree.nodes.push_back(n->right);
 
-			createLeftRightNodes(numberOfLevels - 1, operators, n->left);
-			createLeftRightNodes(numberOfLevels - 1, operators, n->right);
+			createLeftRightNodes(numberOfLevels - 1, operators, n->left, supportedVariables);
+			createLeftRightNodes(numberOfLevels - 1, operators, n->right, supportedVariables);
 		}
 	}
 
@@ -314,7 +349,24 @@ public:
 
 		if (n->IsConstant())
 		{
-			result = atof(n->getConstant().c_str());
+			std::string c = n->getConstant();
+
+			if (c.compare("x") == 0)
+			{
+				result = x;
+			}
+			else if (c.compare("y") == 0)
+			{
+				result = y;
+			}
+			else if (c.compare("z") == 0)
+			{
+				result = z;
+			}
+			else
+			{
+				result = atof(c.c_str());
+			}
 		}
 		else
 		{
@@ -327,8 +379,13 @@ public:
 		return result;
 	}
 
-	double calc()
+	double calc(double x = 0, double y = 0, double z = 0)
 	{
+		this->x = x;
+		this->y = y;
+		this->z = z;
+
+
 		node* firstNode = tree.nodes.front();
 
 		double result = calcNode(firstNode);

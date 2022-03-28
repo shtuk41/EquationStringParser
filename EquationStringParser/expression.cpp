@@ -82,7 +82,6 @@ void expression::closeBraket()
 
 void expression::print_numbers() const
 {
-	std::cout << "\nStored numbers: \n" << std::endl;
 	for (std::string s : numbers)
 	{
 		std::cout << s << std::endl;
@@ -91,7 +90,6 @@ void expression::print_numbers() const
 
 void expression::print_operators() const
 {
-	std::cout << "\nStored operators: \n" << std::endl;
 	for (op s : operators)
 	{
 		std::cout << s.name << "," << s.executionNumber << std::endl;
@@ -100,7 +98,6 @@ void expression::print_operators() const
 
 void expression::print_brakets() const
 {
-	std::cout << "\nBrakets: \n" << std::endl;
 	for (braket_group b : brakets)
 	{
 		std::cout << b.getStartIndex() << " " << (b.isClosed() ? "closed" : "open") << std::endl;

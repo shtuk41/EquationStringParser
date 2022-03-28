@@ -12,13 +12,61 @@
 
 int level = 0;
 
+static const char supportedOps[] = {'+','-','*','/','^'};
+static const char supportedVariableNames[] = { 'x','y','z' };
+
+bool isTokenizable(char in)
+{
+	return isdigit(in) || in == '.';
+}
+
+bool IsSupportedVariableName(char in)
+{
+	for (auto a : supportedVariableNames)
+	{
+		if (in == a)
+			return true;
+	}
+
+	return false;
+}
+
+bool setPrev(char in, char *prev)
+{
+	if (in != ' ')
+	{
+		*prev = in;
+		return true;
+	}
+	else
+	{
+		return false;
+	}
+}
+
+bool IsOperator(char in)
+{
+	for (auto a : supportedOps)
+	{
+		if (in == a)
+			return true;
+	}
+
+	return false;
+}
+
 int main()
 {
+	char supportedOps[] = {'+','-','*','/','^'};
+
 	//const char* eq = "(((55 + 3) ^ 4) * x + ((5 + y) * x))";
 	//const char *eq = "15 - (6 + 5 / 3) / (1 * (4 + 2) + 7)";
-	const char *eq = "3.756 + (6.4563 / 2.23 /3.0 * (4.1 + 2.8))";
-	//const char *eq = "(45.45 - 45 ^ 2) * 4563.45 - 485 * (4.4586 - (2.7562 * 756 / 3)) / (4585 * 45.45)";
-	
+	//const char *eq = "3.756 + (6.4563 / 2.23 /3.0 * (4.1 + 2.8))";
+	//const char *eq = "(45.45 - 45 ^ -2) * -4563.45 - 485 * (4.4586 - (2.7562 * 756 / 3)) / (4585 * 45.45)";
+	//const char* eq = "44 * x";
+	const char* eq = "(45.45 - x ^ -2) * -4563.45 - y * (4.4586 - (2.7562 * z / 3)) / (4585 * 45.45)";
+
+
 	for (int ii = 0; ii < 1; ii++)
 	{
 		std::cout << eq << std::endl;
@@ -28,13 +76,34 @@ int main()
 		token tok;
 		expression manager;
 
+		char prevChar = ' ';
+
 		manager.openBraket();
 	   
 		while (*eqptr != '\0')
 		{
-			if (isdigit(*eqptr) || *eqptr == '.')
+			if (IsSupportedVariableName(*eqptr))
+			{
+				if (tok.length() > 0)
+					throw new std::exception("unexpected variable name");
+
+				setPrev(*eqptr, &prevChar);
+				std::string toklocal(1, *eqptr);
+				manager.addNumber(toklocal);
+				eqptr++;
+				continue;
+			}
+			else if (isTokenizable(*eqptr))
 			{
 				tok.add(*eqptr);
+				setPrev(*eqptr, &prevChar);
+				eqptr++;
+				continue;
+			}
+			else if ((IsOperator(prevChar) || prevChar == '(') && *eqptr == '-')
+			{
+				tok.add(*eqptr);
+				prevChar = ' ';
 				eqptr++;
 				continue;
 			}
@@ -74,34 +143,42 @@ int main()
 
 			std::cout << *eqptr;
 
+			setPrev(*eqptr, &prevChar);
 			eqptr++;
 		}
 
 		manager.closeBraket();
 
+		std::cout << "\nNumbers:\n";
 		manager.print_numbers();
+		std::cout << "\nOperators:\n";
 		manager.print_operators();
+		std::cout << "\nBrackets\n";
 		manager.print_brakets();
 
 		tree_builder builder(&manager);
 		builder.build();
 
+		std::cout << "\nTree:\n";
 		builder.print_tree();
-		double result = builder.calc();
+		double result = builder.calc(5, 4);
 
+		std::cout << "\nTree to string\n" << std::endl;
 		std::cout << builder.to_string() << std::endl;
-
-		std::cout << result << std::endl;
+		std::cout << "\nResults:\n";
+		std::cout << std::fixed << result << std::endl;
 	}
 
-	std::cout << "########################################################" << std::endl;
+	std::cout << "########################################################\n";
+
+	std::cout << "Generating random tree\n";
 
 	tree_builder builder2;
-	builder2.generate_random_tree(1, "*/+-");
+	builder2.generate_random_tree(7, "*/+-");
 	std::cout << builder2.random_to_string() << std::endl;
-	double r_result = builder2.calc();
+	double r_result = builder2.calc(2);
 
-	std::cout << "random result: " << r_result << std::endl;
+	std::cout << "\nrandom result: " << r_result << std::endl;
 
 	return 0;
 
