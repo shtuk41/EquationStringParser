@@ -22,4 +22,5 @@ public:
 	int getOperatorNumber() const;
 	op getOperator() const;
 	std::string getConstant() const;
+	void setConstant(std::string);
 };

@@ -58,3 +58,8 @@ std::string node::getConstant() const
 
 	return constant;
 }
+
+void node::setConstant(std::string val)
+{
+	constant = val;
+}

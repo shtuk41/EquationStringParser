@@ -174,8 +174,17 @@ int main()
 	std::cout << "Generating random tree\n";
 
 	tree_builder builder2;
-	builder2.generate_random_tree(7, "*/+-");
+	builder2.generate_random_tree(3, "*/+-");
+	//std::cout << "Print tree\n";
+	//builder2.print_tree();
+	std::cout << "Random to string\n";
 	std::cout << builder2.random_to_string() << std::endl;
+
+	builder2.mutate();
+
+	std::cout << "Random to string after mutate\n";
+	std::cout << builder2.random_to_string() << std::endl;
+
 	double r_result = builder2.calc(2);
 
 	std::cout << "\nrandom result: " << r_result << std::endl;

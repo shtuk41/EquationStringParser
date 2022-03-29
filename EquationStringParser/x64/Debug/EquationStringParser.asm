@@ -266,10 +266,13 @@ PUBLIC	?_Getal@?$vector@PEAVnode@@V?$allocator@PEAVnode@@@std@@@std@@AEBAAEBV?$a
 PUBLIC	??0?$_Vector_val@U?$_Simple_types@PEAVnode@@@std@@@std@@QEAA@XZ ; std::_Vector_val<std::_Simple_types<node *> >::_Vector_val<std::_Simple_types<node *> >
 PUBLIC	?_Get_first@?$_Compressed_pair@V?$allocator@PEAVnode@@@std@@V?$_Vector_val@U?$_Simple_types@PEAVnode@@@std@@@2@$00@std@@QEAAAEAV?$allocator@PEAVnode@@@2@XZ ; std::_Compressed_pair<std::allocator<node *>,std::_Vector_val<std::_Simple_types<node *> >,1>::_Get_first
 PUBLIC	?_Get_first@?$_Compressed_pair@V?$allocator@PEAVnode@@@std@@V?$_Vector_val@U?$_Simple_types@PEAVnode@@@std@@@2@$00@std@@QEBAAEBV?$allocator@PEAVnode@@@2@XZ ; std::_Compressed_pair<std::allocator<node *>,std::_Vector_val<std::_Simple_types<node *> >,1>::_Get_first
-PUBLIC	?getNodeByNumber@binary_tree@@QEAAPEAVnode@@H@Z	; binary_tree::getNodeByNumber
-PUBLIC	??1binary_tree@@QEAA@XZ				; binary_tree::~binary_tree
 PUBLIC	??0binary_tree@@QEAA@XZ				; binary_tree::binary_tree
+PUBLIC	?getNodeByNumber@binary_tree@@QEAAPEAVnode@@H@Z	; binary_tree::getNodeByNumber
+PUBLIC	?randomDouble@binary_tree@@QEAANNN@Z		; binary_tree::randomDouble
+PUBLIC	?mutate@binary_tree@@QEAAXXZ			; binary_tree::mutate
+PUBLIC	??1binary_tree@@QEAA@XZ				; binary_tree::~binary_tree
 PUBLIC	??0tree_builder@@QEAA@PEAVexpression@@@Z	; tree_builder::tree_builder
+PUBLIC	?mutate@tree_builder@@QEAAXXZ			; tree_builder::mutate
 PUBLIC	?generate_random_tree@tree_builder@@QEAAXHV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@0@Z ; tree_builder::generate_random_tree
 PUBLIC	?randomDouble@tree_builder@@QEAANNN@Z		; tree_builder::randomDouble
 PUBLIC	?getrand@tree_builder@@QEAAH_K@Z		; tree_builder::getrand
@@ -456,6 +459,8 @@ PUBLIC	??_C@_0L@JILAODGG@?6Results?3?6@		; `string'
 PUBLIC	??_C@_0DK@DDLKBKO@?$CD?$CD?$CD?$CD?$CD?$CD?$CD?$CD?$CD?$CD?$CD?$CD?$CD?$CD?$CD?$CD?$CD?$CD?$CD?$CD?$CD?$CD?$CD?$CD?$CD?$CD?$CD?$CD?$CD?$CD?$CD@ ; `string'
 PUBLIC	??_C@_0BI@MLCIECCN@Generating?5random?5tree?6@	; `string'
 PUBLIC	??_C@_04FOMPHDMB@?$CK?1?$CL?9@			; `string'
+PUBLIC	??_C@_0BC@MPCDHICC@Random?5to?5string?6@	; `string'
+PUBLIC	??_C@_0BP@NANDEHKL@Random?5to?5string?5after?5mutate?6@ ; `string'
 PUBLIC	??_C@_0BB@GEDOGCLG@?6random?5result?3?5@	; `string'
 PUBLIC	??_C@_0BP@KGLJJIBC@front?$CI?$CJ?5called?5on?5empty?5vector@ ; `string'
 PUBLIC	??_C@_0GH@KMHDIFOI@C?3?2Program?5Files?5?$CIx86?$CJ?2Microsof@ ; `string'
@@ -560,6 +565,7 @@ EXTRN	?IsConstant@node@@QEBA_NXZ:PROC			; node::IsConstant
 EXTRN	?getOperatorNumber@node@@QEBAHXZ:PROC		; node::getOperatorNumber
 EXTRN	?getOperator@node@@QEBA?AUop@@XZ:PROC		; node::getOperator
 EXTRN	?getConstant@node@@QEBA?AV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@XZ:PROC ; node::getConstant
+EXTRN	?setConstant@node@@QEAAXV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z:PROC ; node::setConstant
 EXTRN	_CxxThrowException:PROC
 EXTRN	_RTC_CheckStackVars:PROC
 EXTRN	_RTC_InitBase:PROC
@@ -1804,9 +1810,27 @@ $pdata$?_Get_first@?$_Compressed_pair@V?$allocator@PEAVnode@@@std@@V?$_Vector_va
 pdata	ENDS
 ;	COMDAT pdata
 pdata	SEGMENT
+$pdata$??0binary_tree@@QEAA@XZ DD imagerel $LN4
+	DD	imagerel $LN4+78
+	DD	imagerel $unwind$??0binary_tree@@QEAA@XZ
+pdata	ENDS
+;	COMDAT pdata
+pdata	SEGMENT
 $pdata$?getNodeByNumber@binary_tree@@QEAAPEAVnode@@H@Z DD imagerel $LN7
 	DD	imagerel $LN7+144
 	DD	imagerel $unwind$?getNodeByNumber@binary_tree@@QEAAPEAVnode@@H@Z
+pdata	ENDS
+;	COMDAT pdata
+pdata	SEGMENT
+$pdata$?randomDouble@binary_tree@@QEAANNN@Z DD imagerel $LN3
+	DD	imagerel $LN3+119
+	DD	imagerel $unwind$?randomDouble@binary_tree@@QEAANNN@Z
+pdata	ENDS
+;	COMDAT pdata
+pdata	SEGMENT
+$pdata$?mutate@binary_tree@@QEAAXXZ DD imagerel $LN13
+	DD	imagerel $LN13+439
+	DD	imagerel $unwind$?mutate@binary_tree@@QEAAXXZ
 pdata	ENDS
 ;	COMDAT pdata
 pdata	SEGMENT
@@ -1816,15 +1840,15 @@ $pdata$??1binary_tree@@QEAA@XZ DD imagerel $LN8
 pdata	ENDS
 ;	COMDAT pdata
 pdata	SEGMENT
-$pdata$??0binary_tree@@QEAA@XZ DD imagerel $LN3
-	DD	imagerel $LN3+51
-	DD	imagerel $unwind$??0binary_tree@@QEAA@XZ
-pdata	ENDS
-;	COMDAT pdata
-pdata	SEGMENT
 $pdata$??0tree_builder@@QEAA@PEAVexpression@@@Z DD imagerel $LN4
 	DD	imagerel $LN4+104
 	DD	imagerel $unwind$??0tree_builder@@QEAA@PEAVexpression@@@Z
+pdata	ENDS
+;	COMDAT pdata
+pdata	SEGMENT
+$pdata$?mutate@tree_builder@@QEAAXXZ DD imagerel $LN3
+	DD	imagerel $LN3+60
+	DD	imagerel $unwind$?mutate@tree_builder@@QEAAXXZ
 pdata	ENDS
 ;	COMDAT pdata
 pdata	SEGMENT
@@ -2302,8 +2326,8 @@ $pdata$?IsOperator@@YA_ND@Z DD imagerel $LN7
 pdata	ENDS
 ;	COMDAT pdata
 pdata	SEGMENT
-$pdata$main DD	imagerel $LN52
-	DD	imagerel $LN52+2323
+$pdata$main DD	imagerel $LN53
+	DD	imagerel $LN53+2459
 	DD	imagerel $unwind$main
 pdata	ENDS
 ;	COMDAT pdata
@@ -2353,6 +2377,12 @@ pdata	SEGMENT
 $pdata$main$dtor$15 DD imagerel main$dtor$15
 	DD	imagerel main$dtor$15+39
 	DD	imagerel $unwind$main$dtor$15
+pdata	ENDS
+;	COMDAT pdata
+pdata	SEGMENT
+$pdata$main$dtor$16 DD imagerel main$dtor$16
+	DD	imagerel main$dtor$16+39
+	DD	imagerel $unwind$main$dtor$16
 pdata	ENDS
 ;	COMDAT pdata
 pdata	SEGMENT
@@ -3446,6 +3476,15 @@ CONST	ENDS
 ;	COMDAT ??_C@_0BB@GEDOGCLG@?6random?5result?3?5@
 CONST	SEGMENT
 ??_C@_0BB@GEDOGCLG@?6random?5result?3?5@ DB 0aH, 'random result: ', 00H ; `string'
+CONST	ENDS
+;	COMDAT ??_C@_0BP@NANDEHKL@Random?5to?5string?5after?5mutate?6@
+CONST	SEGMENT
+??_C@_0BP@NANDEHKL@Random?5to?5string?5after?5mutate?6@ DB 'Random to str'
+	DB	'ing after mutate', 0aH, 00H			; `string'
+CONST	ENDS
+;	COMDAT ??_C@_0BC@MPCDHICC@Random?5to?5string?6@
+CONST	SEGMENT
+??_C@_0BC@MPCDHICC@Random?5to?5string?6@ DB 'Random to string', 0aH, 00H ; `string'
 CONST	ENDS
 ;	COMDAT ??_C@_04FOMPHDMB@?$CK?1?$CL?9@
 CONST	SEGMENT
@@ -5151,9 +5190,20 @@ _volmd	DB	00H
 voltbl	ENDS
 ;	COMDAT voltbl
 voltbl	SEGMENT
-_volmd	DW	02aH
-	DW	0895H
+_volmd	DB	00H
+	DB	05H
 voltbl	ENDS
+;	COMDAT voltbl
+voltbl	SEGMENT
+_volmd	DW	02aH
+	DW	091fH
+voltbl	ENDS
+;	COMDAT xdata
+xdata	SEGMENT
+$unwind$main$dtor$16 DD 031001H
+	DD	0700c4210H
+	DD	0500bH
+xdata	ENDS
 ;	COMDAT xdata
 xdata	SEGMENT
 $unwind$main$dtor$15 DD 031001H
@@ -5204,7 +5254,7 @@ $unwind$main$dtor$0 DD 031001H
 xdata	ENDS
 ;	COMDAT xdata
 xdata	SEGMENT
-$ip2state$main DB '('
+$ip2state$main DB ','
 	DB	00H
 	DB	00H
 	DB	0f5H, 02H
@@ -5237,18 +5287,22 @@ $ip2state$main DB '('
 	DB	0eH
 	DB	'4'
 	DB	0cH
-	DB	08eH
+	DB	0b4H
 	DB	010H
+	DB	'H'
+	DB	0cH
+	DB	0a6H
+	DB	012H
 	DB	'H'
 	DB	0cH
 	DB	0d8H
 	DB	00H
-	DB	086H
+	DB	082H
 	DB	02H
 xdata	ENDS
 ;	COMDAT xdata
 xdata	SEGMENT
-$stateUnwindMap$main DB 010H
+$stateUnwindMap$main DB 012H
 	DB	0eH
 	DD	imagerel main$dtor$0
 	DB	02eH
@@ -5265,6 +5319,8 @@ $stateUnwindMap$main DB 010H
 	DD	imagerel main$dtor$13
 	DB	056H
 	DD	imagerel main$dtor$15
+	DB	07eH
+	DD	imagerel main$dtor$16
 xdata	ENDS
 ;	COMDAT xdata
 xdata	SEGMENT
@@ -5276,11 +5332,11 @@ xdata	ENDS
 xdata	SEGMENT
 $unwind$main DD	025053119H
 	DD	010a230fH
-	DD	070030145H
+	DD	07003014dH
 	DD	05002H
 	DD	imagerel __GSHandlerCheck_EH4
 	DD	imagerel $cppxdata$main
-	DD	0a12H
+	DD	0a52H
 xdata	ENDS
 ;	COMDAT CONST
 CONST	SEGMENT
@@ -7040,17 +7096,17 @@ CONST	SEGMENT
 CONST	ENDS
 ;	COMDAT xdata
 xdata	SEGMENT
+$unwind$?mutate@tree_builder@@QEAAXXZ DD 025051301H
+	DD	010e2313H
+	DD	07007001dH
+	DD	05006H
+xdata	ENDS
+;	COMDAT xdata
+xdata	SEGMENT
 $unwind$??0tree_builder@@QEAA@PEAVexpression@@@Z DD 025051801H
 	DD	01132318H
 	DD	0700c001dH
 	DD	0500bH
-xdata	ENDS
-;	COMDAT xdata
-xdata	SEGMENT
-$unwind$??0binary_tree@@QEAA@XZ DD 025051301H
-	DD	010e2313H
-	DD	07007001dH
-	DD	05006H
 xdata	ENDS
 ;	COMDAT xdata
 xdata	SEGMENT
@@ -7061,10 +7117,31 @@ $unwind$??1binary_tree@@QEAA@XZ DD 025051301H
 xdata	ENDS
 ;	COMDAT xdata
 xdata	SEGMENT
+$unwind$?mutate@binary_tree@@QEAAXXZ DD 025051301H
+	DD	010e2313H
+	DD	070070059H
+	DD	05006H
+xdata	ENDS
+;	COMDAT xdata
+xdata	SEGMENT
+$unwind$?randomDouble@binary_tree@@QEAANNN@Z DD 035051f01H
+	DD	011a331fH
+	DD	070130023H
+	DD	05012H
+xdata	ENDS
+;	COMDAT xdata
+xdata	SEGMENT
 $unwind$?getNodeByNumber@binary_tree@@QEAAPEAVnode@@H@Z DD 025051701H
 	DD	01122317H
 	DD	0700b002dH
 	DD	0500aH
+xdata	ENDS
+;	COMDAT xdata
+xdata	SEGMENT
+$unwind$??0binary_tree@@QEAA@XZ DD 025051301H
+	DD	010e2313H
+	DD	07007001dH
+	DD	05006H
 xdata	ENDS
 ;	COMDAT xdata
 xdata	SEGMENT
@@ -16864,35 +16941,38 @@ $T36 = 2312
 $T37 = 2344
 $T38 = 2408
 $T39 = 2440
-$T40 = 2500
-tv182 = 2516
-tv415 = 2520
-tv413 = 2520
-tv411 = 2520
-tv409 = 2520
-tv407 = 2520
-tv405 = 2520
-tv402 = 2520
-tv350 = 2520
-tv306 = 2520
-tv138 = 2520
-tv132 = 2520
-tv425 = 2528
-tv421 = 2528
-tv418 = 2528
-tv423 = 2536
-__$ArrayPad$ = 2544
+$T40 = 2504
+$T41 = 2564
+tv182 = 2580
+tv430 = 2584
+tv428 = 2584
+tv426 = 2584
+tv424 = 2584
+tv422 = 2584
+tv420 = 2584
+tv417 = 2584
+tv350 = 2584
+tv306 = 2584
+tv138 = 2584
+tv132 = 2584
+tv79 = 2584
+tv442 = 2592
+tv440 = 2592
+tv436 = 2592
+tv433 = 2592
+tv438 = 2600
+__$ArrayPad$ = 2608
 main	PROC						; COMDAT
 
 ; 59   : {
 
-$LN52:
+$LN53:
 	push	rbp
 	push	rdi
-	sub	rsp, 2600				; 00000a28H
+	sub	rsp, 2664				; 00000a68H
 	lea	rbp, QWORD PTR [rsp+32]
 	lea	rdi, QWORD PTR [rsp+32]
-	mov	ecx, 450				; 000001c2H
+	mov	ecx, 466				; 000001d2H
 	mov	eax, -858993460				; ccccccccH
 	rep stosd
 	mov	rax, QWORD PTR __security_cookie
@@ -17053,8 +17133,8 @@ $LN11@main:
 	lea	rdx, QWORD PTR toklocal$15[rbp]
 	mov	rcx, QWORD PTR $T21[rbp]
 	call	??0?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@QEAA@AEBV01@@Z ; std::basic_string<char,std::char_traits<char>,std::allocator<char> >::basic_string<char,std::char_traits<char>,std::allocator<char> >
-	mov	QWORD PTR tv402[rbp], rax
-	mov	rdx, QWORD PTR tv402[rbp]
+	mov	QWORD PTR tv417[rbp], rax
+	mov	rdx, QWORD PTR tv417[rbp]
 	lea	rcx, QWORD PTR manager$13[rbp]
 	call	?addNumber@expression@@QEAAXV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z ; expression::addNumber
 
@@ -17174,8 +17254,8 @@ $LN14@main:
 	mov	rdx, QWORD PTR $T23[rbp]
 	lea	rcx, QWORD PTR tok$12[rbp]
 	call	?readString@token@@QEBA?AV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@XZ ; token::readString
-	mov	QWORD PTR tv405[rbp], rax
-	mov	rdx, QWORD PTR tv405[rbp]
+	mov	QWORD PTR tv420[rbp], rax
+	mov	rdx, QWORD PTR tv420[rbp]
 	lea	rcx, QWORD PTR manager$13[rbp]
 	call	?addNumber@expression@@QEAAXV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z ; expression::addNumber
 
@@ -17199,8 +17279,8 @@ $LN10@main:
 	ja	$LN7@main
 	movsxd	rax, DWORD PTR tv182[rbp]
 	lea	rcx, OFFSET FLAT:__ImageBase
-	movzx	eax, BYTE PTR $LN49@main[rcx+rax]
-	mov	eax, DWORD PTR $LN50@main[rcx+rax*4]
+	movzx	eax, BYTE PTR $LN50@main[rcx+rax]
+	mov	eax, DWORD PTR $LN51@main[rcx+rax*4]
 	add	rax, rcx
 	jmp	rax
 $LN18@main:
@@ -17250,8 +17330,8 @@ $LN21@main:
 	mov	edx, 1
 	mov	rcx, QWORD PTR $T25[rbp]
 	call	??0?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@QEAA@_KD@Z ; std::basic_string<char,std::char_traits<char>,std::allocator<char> >::basic_string<char,std::char_traits<char>,std::allocator<char> >
-	mov	QWORD PTR tv407[rbp], rax
-	mov	rdx, QWORD PTR tv407[rbp]
+	mov	QWORD PTR tv422[rbp], rax
+	mov	rdx, QWORD PTR tv422[rbp]
 	lea	rcx, QWORD PTR manager$13[rbp]
 	call	?addOperator@expression@@QEAAXV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z ; expression::addOperator
 
@@ -17270,8 +17350,8 @@ $LN22@main:
 	mov	edx, 1
 	mov	rcx, QWORD PTR $T27[rbp]
 	call	??0?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@QEAA@_KD@Z ; std::basic_string<char,std::char_traits<char>,std::allocator<char> >::basic_string<char,std::char_traits<char>,std::allocator<char> >
-	mov	QWORD PTR tv409[rbp], rax
-	mov	rdx, QWORD PTR tv409[rbp]
+	mov	QWORD PTR tv424[rbp], rax
+	mov	rdx, QWORD PTR tv424[rbp]
 	lea	rcx, QWORD PTR manager$13[rbp]
 	call	?addOperator@expression@@QEAAXV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z ; expression::addOperator
 
@@ -17290,8 +17370,8 @@ $LN23@main:
 	mov	edx, 1
 	mov	rcx, QWORD PTR $T29[rbp]
 	call	??0?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@QEAA@_KD@Z ; std::basic_string<char,std::char_traits<char>,std::allocator<char> >::basic_string<char,std::char_traits<char>,std::allocator<char> >
-	mov	QWORD PTR tv411[rbp], rax
-	mov	rdx, QWORD PTR tv411[rbp]
+	mov	QWORD PTR tv426[rbp], rax
+	mov	rdx, QWORD PTR tv426[rbp]
 	lea	rcx, QWORD PTR manager$13[rbp]
 	call	?addOperator@expression@@QEAAXV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z ; expression::addOperator
 
@@ -17310,8 +17390,8 @@ $LN24@main:
 	mov	edx, 1
 	mov	rcx, QWORD PTR $T31[rbp]
 	call	??0?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@QEAA@_KD@Z ; std::basic_string<char,std::char_traits<char>,std::allocator<char> >::basic_string<char,std::char_traits<char>,std::allocator<char> >
-	mov	QWORD PTR tv413[rbp], rax
-	mov	rdx, QWORD PTR tv413[rbp]
+	mov	QWORD PTR tv428[rbp], rax
+	mov	rdx, QWORD PTR tv428[rbp]
 	lea	rcx, QWORD PTR manager$13[rbp]
 	call	?addOperator@expression@@QEAAXV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z ; expression::addOperator
 
@@ -17330,8 +17410,8 @@ $LN25@main:
 	mov	edx, 1
 	mov	rcx, QWORD PTR $T33[rbp]
 	call	??0?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@QEAA@_KD@Z ; std::basic_string<char,std::char_traits<char>,std::allocator<char> >::basic_string<char,std::char_traits<char>,std::allocator<char> >
-	mov	QWORD PTR tv415[rbp], rax
-	mov	rdx, QWORD PTR tv415[rbp]
+	mov	QWORD PTR tv430[rbp], rax
+	mov	rdx, QWORD PTR tv430[rbp]
 	lea	rcx, QWORD PTR manager$13[rbp]
 	call	?addOperator@expression@@QEAAXV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z ; expression::addOperator
 $LN7@main:
@@ -17459,8 +17539,8 @@ $LN6@main:
 	call	?to_string@tree_builder@@QEAA?AV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@XZ ; tree_builder::to_string
 	mov	QWORD PTR tv306[rbp], rax
 	mov	rax, QWORD PTR tv306[rbp]
-	mov	QWORD PTR tv418[rbp], rax
-	mov	rdx, QWORD PTR tv418[rbp]
+	mov	QWORD PTR tv433[rbp], rax
+	mov	rdx, QWORD PTR tv433[rbp]
 	mov	rcx, QWORD PTR __imp_?cout@std@@3V?$basic_ostream@DU?$char_traits@D@std@@@1@A
 	call	??$?6DU?$char_traits@D@std@@V?$allocator@D@1@@std@@YAAEAV?$basic_ostream@DU?$char_traits@D@std@@@0@AEAV10@AEBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@0@@Z ; std::operator<<<char,std::char_traits<char>,std::allocator<char> >
 	lea	rdx, OFFSET FLAT:??$endl@DU?$char_traits@D@std@@@std@@YAAEAV?$basic_ostream@DU?$char_traits@D@std@@@0@AEAV10@@Z ; std::endl<char,std::char_traits<char> >
@@ -17527,7 +17607,7 @@ $LN3@main:
 	call	??0tree_builder@@QEAA@PEAVexpression@@@Z ; tree_builder::tree_builder
 	npad	1
 
-; 177  : 	builder2.generate_random_tree(7, "*/+-");
+; 177  : 	builder2.generate_random_tree(3, "*/+-");
 
 	lea	rax, QWORD PTR $T35[rbp]
 	mov	QWORD PTR $T36[rbp], rax
@@ -17538,26 +17618,34 @@ $LN3@main:
 	call	??0?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@QEAA@QEBD@Z ; std::basic_string<char,std::char_traits<char>,std::allocator<char> >::basic_string<char,std::char_traits<char>,std::allocator<char> >
 	mov	QWORD PTR tv350[rbp], rax
 	mov	rax, QWORD PTR tv350[rbp]
-	mov	QWORD PTR tv421[rbp], rax
+	mov	QWORD PTR tv436[rbp], rax
 	lea	rdx, OFFSET FLAT:??_C@_04FOMPHDMB@?$CK?1?$CL?9@
 	mov	rcx, QWORD PTR $T38[rbp]
 	call	??0?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@QEAA@QEBD@Z ; std::basic_string<char,std::char_traits<char>,std::allocator<char> >::basic_string<char,std::char_traits<char>,std::allocator<char> >
-	mov	QWORD PTR tv423[rbp], rax
-	mov	r9, QWORD PTR tv421[rbp]
-	mov	r8, QWORD PTR tv423[rbp]
-	mov	edx, 7
+	mov	QWORD PTR tv438[rbp], rax
+	mov	r9, QWORD PTR tv436[rbp]
+	mov	r8, QWORD PTR tv438[rbp]
+	mov	edx, 3
 	lea	rcx, QWORD PTR builder2$[rbp]
 	call	?generate_random_tree@tree_builder@@QEAAXHV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@0@Z ; tree_builder::generate_random_tree
 
-; 178  : 	std::cout << builder2.random_to_string() << std::endl;
+; 178  : 	//std::cout << "Print tree\n";
+; 179  : 	//builder2.print_tree();
+; 180  : 	std::cout << "Random to string\n";
+
+	lea	rdx, OFFSET FLAT:??_C@_0BC@MPCDHICC@Random?5to?5string?6@
+	mov	rcx, QWORD PTR __imp_?cout@std@@3V?$basic_ostream@DU?$char_traits@D@std@@@1@A
+	call	??$?6U?$char_traits@D@std@@@std@@YAAEAV?$basic_ostream@DU?$char_traits@D@std@@@0@AEAV10@PEBD@Z ; std::operator<<<std::char_traits<char> >
+
+; 181  : 	std::cout << builder2.random_to_string() << std::endl;
 
 	lea	rdx, QWORD PTR $T39[rbp]
 	lea	rcx, QWORD PTR builder2$[rbp]
 	call	?random_to_string@tree_builder@@QEAA?AV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@XZ ; tree_builder::random_to_string
 	mov	QWORD PTR tv138[rbp], rax
 	mov	rax, QWORD PTR tv138[rbp]
-	mov	QWORD PTR tv425[rbp], rax
-	mov	rdx, QWORD PTR tv425[rbp]
+	mov	QWORD PTR tv440[rbp], rax
+	mov	rdx, QWORD PTR tv440[rbp]
 	mov	rcx, QWORD PTR __imp_?cout@std@@3V?$basic_ostream@DU?$char_traits@D@std@@@1@A
 	call	??$?6DU?$char_traits@D@std@@V?$allocator@D@1@@std@@YAAEAV?$basic_ostream@DU?$char_traits@D@std@@@0@AEAV10@AEBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@0@@Z ; std::operator<<<char,std::char_traits<char>,std::allocator<char> >
 	lea	rdx, OFFSET FLAT:??$endl@DU?$char_traits@D@std@@@std@@YAAEAV?$basic_ostream@DU?$char_traits@D@std@@@0@AEAV10@@Z ; std::endl<char,std::char_traits<char> >
@@ -17567,7 +17655,39 @@ $LN3@main:
 	lea	rcx, QWORD PTR $T39[rbp]
 	call	??1?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@QEAA@XZ ; std::basic_string<char,std::char_traits<char>,std::allocator<char> >::~basic_string<char,std::char_traits<char>,std::allocator<char> >
 
-; 179  : 	double r_result = builder2.calc(2);
+; 182  : 
+; 183  : 	builder2.mutate();
+
+	lea	rcx, QWORD PTR builder2$[rbp]
+	call	?mutate@tree_builder@@QEAAXXZ		; tree_builder::mutate
+
+; 184  : 
+; 185  : 	std::cout << "Random to string after mutate\n";
+
+	lea	rdx, OFFSET FLAT:??_C@_0BP@NANDEHKL@Random?5to?5string?5after?5mutate?6@
+	mov	rcx, QWORD PTR __imp_?cout@std@@3V?$basic_ostream@DU?$char_traits@D@std@@@1@A
+	call	??$?6U?$char_traits@D@std@@@std@@YAAEAV?$basic_ostream@DU?$char_traits@D@std@@@0@AEAV10@PEBD@Z ; std::operator<<<std::char_traits<char> >
+
+; 186  : 	std::cout << builder2.random_to_string() << std::endl;
+
+	lea	rdx, QWORD PTR $T40[rbp]
+	lea	rcx, QWORD PTR builder2$[rbp]
+	call	?random_to_string@tree_builder@@QEAA?AV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@XZ ; tree_builder::random_to_string
+	mov	QWORD PTR tv79[rbp], rax
+	mov	rax, QWORD PTR tv79[rbp]
+	mov	QWORD PTR tv442[rbp], rax
+	mov	rdx, QWORD PTR tv442[rbp]
+	mov	rcx, QWORD PTR __imp_?cout@std@@3V?$basic_ostream@DU?$char_traits@D@std@@@1@A
+	call	??$?6DU?$char_traits@D@std@@V?$allocator@D@1@@std@@YAAEAV?$basic_ostream@DU?$char_traits@D@std@@@0@AEAV10@AEBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@0@@Z ; std::operator<<<char,std::char_traits<char>,std::allocator<char> >
+	lea	rdx, OFFSET FLAT:??$endl@DU?$char_traits@D@std@@@std@@YAAEAV?$basic_ostream@DU?$char_traits@D@std@@@0@AEAV10@@Z ; std::endl<char,std::char_traits<char> >
+	mov	rcx, rax
+	call	QWORD PTR __imp_??6?$basic_ostream@DU?$char_traits@D@std@@@std@@QEAAAEAV01@P6AAEAV01@AEAV01@@Z@Z
+	npad	1
+	lea	rcx, QWORD PTR $T40[rbp]
+	call	??1?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@QEAA@XZ ; std::basic_string<char,std::char_traits<char>,std::allocator<char> >::~basic_string<char,std::char_traits<char>,std::allocator<char> >
+
+; 187  : 
+; 188  : 	double r_result = builder2.calc(2);
 
 	xorps	xmm3, xmm3
 	xorps	xmm2, xmm2
@@ -17576,8 +17696,8 @@ $LN3@main:
 	call	?calc@tree_builder@@QEAANNNN@Z		; tree_builder::calc
 	movsd	QWORD PTR r_result$[rbp], xmm0
 
-; 180  : 
-; 181  : 	std::cout << "\nrandom result: " << r_result << std::endl;
+; 189  : 
+; 190  : 	std::cout << "\nrandom result: " << r_result << std::endl;
 
 	lea	rdx, OFFSET FLAT:??_C@_0BB@GEDOGCLG@?6random?5result?3?5@
 	mov	rcx, QWORD PTR __imp_?cout@std@@3V?$basic_ostream@DU?$char_traits@D@std@@@1@A
@@ -17589,16 +17709,16 @@ $LN3@main:
 	mov	rcx, rax
 	call	QWORD PTR __imp_??6?$basic_ostream@DU?$char_traits@D@std@@@std@@QEAAAEAV01@P6AAEAV01@AEAV01@@Z@Z
 
-; 182  : 
-; 183  : 	return 0;
+; 191  : 
+; 192  : 	return 0;
 
-	mov	DWORD PTR $T40[rbp], 0
+	mov	DWORD PTR $T41[rbp], 0
 	lea	rcx, QWORD PTR builder2$[rbp]
 	call	??1tree_builder@@QEAA@XZ
-	mov	eax, DWORD PTR $T40[rbp]
+	mov	eax, DWORD PTR $T41[rbp]
 
-; 184  : 
-; 185  : }
+; 193  : 
+; 194  : }
 
 	mov	rdi, rax
 	lea	rcx, QWORD PTR [rbp-32]
@@ -17608,13 +17728,12 @@ $LN3@main:
 	mov	rcx, QWORD PTR __$ArrayPad$[rbp]
 	xor	rcx, rbp
 	call	__security_check_cookie
-	lea	rsp, QWORD PTR [rbp+2568]
+	lea	rsp, QWORD PTR [rbp+2632]
 	pop	rdi
 	pop	rbp
 	ret	0
+$LN52@main:
 $LN51@main:
-	npad	2
-$LN50@main:
 	DD	$LN18@main
 	DD	$LN19@main
 	DD	$LN20@main
@@ -17624,7 +17743,7 @@ $LN50@main:
 	DD	$LN22@main
 	DD	$LN25@main
 	DD	$LN7@main
-$LN49@main:
+$LN50@main:
 	DB	0
 	DB	8
 	DB	8
@@ -17726,24 +17845,27 @@ $T36 = 2312
 $T37 = 2344
 $T38 = 2408
 $T39 = 2440
-$T40 = 2500
-tv182 = 2516
-tv415 = 2520
-tv413 = 2520
-tv411 = 2520
-tv409 = 2520
-tv407 = 2520
-tv405 = 2520
-tv402 = 2520
-tv350 = 2520
-tv306 = 2520
-tv138 = 2520
-tv132 = 2520
-tv425 = 2528
-tv421 = 2528
-tv418 = 2528
-tv423 = 2536
-__$ArrayPad$ = 2544
+$T40 = 2504
+$T41 = 2564
+tv182 = 2580
+tv430 = 2584
+tv428 = 2584
+tv426 = 2584
+tv424 = 2584
+tv422 = 2584
+tv420 = 2584
+tv417 = 2584
+tv350 = 2584
+tv306 = 2584
+tv138 = 2584
+tv132 = 2584
+tv79 = 2584
+tv442 = 2592
+tv440 = 2592
+tv436 = 2592
+tv433 = 2592
+tv438 = 2600
+__$ArrayPad$ = 2608
 main$dtor$0 PROC
 	mov	QWORD PTR [rsp+8], rcx
 	mov	QWORD PTR [rsp+16], rdx
@@ -17795,24 +17917,27 @@ $T36 = 2312
 $T37 = 2344
 $T38 = 2408
 $T39 = 2440
-$T40 = 2500
-tv182 = 2516
-tv415 = 2520
-tv413 = 2520
-tv411 = 2520
-tv409 = 2520
-tv407 = 2520
-tv405 = 2520
-tv402 = 2520
-tv350 = 2520
-tv306 = 2520
-tv138 = 2520
-tv132 = 2520
-tv425 = 2528
-tv421 = 2528
-tv418 = 2528
-tv423 = 2536
-__$ArrayPad$ = 2544
+$T40 = 2504
+$T41 = 2564
+tv182 = 2580
+tv430 = 2584
+tv428 = 2584
+tv426 = 2584
+tv424 = 2584
+tv422 = 2584
+tv420 = 2584
+tv417 = 2584
+tv350 = 2584
+tv306 = 2584
+tv138 = 2584
+tv132 = 2584
+tv79 = 2584
+tv442 = 2592
+tv440 = 2592
+tv436 = 2592
+tv433 = 2592
+tv438 = 2600
+__$ArrayPad$ = 2608
 main$dtor$1 PROC
 	mov	QWORD PTR [rsp+8], rcx
 	mov	QWORD PTR [rsp+16], rdx
@@ -17864,24 +17989,27 @@ $T36 = 2312
 $T37 = 2344
 $T38 = 2408
 $T39 = 2440
-$T40 = 2500
-tv182 = 2516
-tv415 = 2520
-tv413 = 2520
-tv411 = 2520
-tv409 = 2520
-tv407 = 2520
-tv405 = 2520
-tv402 = 2520
-tv350 = 2520
-tv306 = 2520
-tv138 = 2520
-tv132 = 2520
-tv425 = 2528
-tv421 = 2528
-tv418 = 2528
-tv423 = 2536
-__$ArrayPad$ = 2544
+$T40 = 2504
+$T41 = 2564
+tv182 = 2580
+tv430 = 2584
+tv428 = 2584
+tv426 = 2584
+tv424 = 2584
+tv422 = 2584
+tv420 = 2584
+tv417 = 2584
+tv350 = 2584
+tv306 = 2584
+tv138 = 2584
+tv132 = 2584
+tv79 = 2584
+tv442 = 2592
+tv440 = 2592
+tv436 = 2592
+tv433 = 2592
+tv438 = 2600
+__$ArrayPad$ = 2608
 main$dtor$2 PROC
 	mov	QWORD PTR [rsp+8], rcx
 	mov	QWORD PTR [rsp+16], rdx
@@ -17933,24 +18061,27 @@ $T36 = 2312
 $T37 = 2344
 $T38 = 2408
 $T39 = 2440
-$T40 = 2500
-tv182 = 2516
-tv415 = 2520
-tv413 = 2520
-tv411 = 2520
-tv409 = 2520
-tv407 = 2520
-tv405 = 2520
-tv402 = 2520
-tv350 = 2520
-tv306 = 2520
-tv138 = 2520
-tv132 = 2520
-tv425 = 2528
-tv421 = 2528
-tv418 = 2528
-tv423 = 2536
-__$ArrayPad$ = 2544
+$T40 = 2504
+$T41 = 2564
+tv182 = 2580
+tv430 = 2584
+tv428 = 2584
+tv426 = 2584
+tv424 = 2584
+tv422 = 2584
+tv420 = 2584
+tv417 = 2584
+tv350 = 2584
+tv306 = 2584
+tv138 = 2584
+tv132 = 2584
+tv79 = 2584
+tv442 = 2592
+tv440 = 2592
+tv436 = 2592
+tv433 = 2592
+tv438 = 2600
+__$ArrayPad$ = 2608
 main$dtor$10 PROC
 	mov	QWORD PTR [rsp+8], rcx
 	mov	QWORD PTR [rsp+16], rdx
@@ -18002,24 +18133,27 @@ $T36 = 2312
 $T37 = 2344
 $T38 = 2408
 $T39 = 2440
-$T40 = 2500
-tv182 = 2516
-tv415 = 2520
-tv413 = 2520
-tv411 = 2520
-tv409 = 2520
-tv407 = 2520
-tv405 = 2520
-tv402 = 2520
-tv350 = 2520
-tv306 = 2520
-tv138 = 2520
-tv132 = 2520
-tv425 = 2528
-tv421 = 2528
-tv418 = 2528
-tv423 = 2536
-__$ArrayPad$ = 2544
+$T40 = 2504
+$T41 = 2564
+tv182 = 2580
+tv430 = 2584
+tv428 = 2584
+tv426 = 2584
+tv424 = 2584
+tv422 = 2584
+tv420 = 2584
+tv417 = 2584
+tv350 = 2584
+tv306 = 2584
+tv138 = 2584
+tv132 = 2584
+tv79 = 2584
+tv442 = 2592
+tv440 = 2592
+tv436 = 2592
+tv433 = 2592
+tv438 = 2600
+__$ArrayPad$ = 2608
 main$dtor$11 PROC
 	mov	QWORD PTR [rsp+8], rcx
 	mov	QWORD PTR [rsp+16], rdx
@@ -18071,24 +18205,27 @@ $T36 = 2312
 $T37 = 2344
 $T38 = 2408
 $T39 = 2440
-$T40 = 2500
-tv182 = 2516
-tv415 = 2520
-tv413 = 2520
-tv411 = 2520
-tv409 = 2520
-tv407 = 2520
-tv405 = 2520
-tv402 = 2520
-tv350 = 2520
-tv306 = 2520
-tv138 = 2520
-tv132 = 2520
-tv425 = 2528
-tv421 = 2528
-tv418 = 2528
-tv423 = 2536
-__$ArrayPad$ = 2544
+$T40 = 2504
+$T41 = 2564
+tv182 = 2580
+tv430 = 2584
+tv428 = 2584
+tv426 = 2584
+tv424 = 2584
+tv422 = 2584
+tv420 = 2584
+tv417 = 2584
+tv350 = 2584
+tv306 = 2584
+tv138 = 2584
+tv132 = 2584
+tv79 = 2584
+tv442 = 2592
+tv440 = 2592
+tv436 = 2592
+tv433 = 2592
+tv438 = 2600
+__$ArrayPad$ = 2608
 main$dtor$12 PROC
 	mov	QWORD PTR [rsp+8], rcx
 	mov	QWORD PTR [rsp+16], rdx
@@ -18140,24 +18277,27 @@ $T36 = 2312
 $T37 = 2344
 $T38 = 2408
 $T39 = 2440
-$T40 = 2500
-tv182 = 2516
-tv415 = 2520
-tv413 = 2520
-tv411 = 2520
-tv409 = 2520
-tv407 = 2520
-tv405 = 2520
-tv402 = 2520
-tv350 = 2520
-tv306 = 2520
-tv138 = 2520
-tv132 = 2520
-tv425 = 2528
-tv421 = 2528
-tv418 = 2528
-tv423 = 2536
-__$ArrayPad$ = 2544
+$T40 = 2504
+$T41 = 2564
+tv182 = 2580
+tv430 = 2584
+tv428 = 2584
+tv426 = 2584
+tv424 = 2584
+tv422 = 2584
+tv420 = 2584
+tv417 = 2584
+tv350 = 2584
+tv306 = 2584
+tv138 = 2584
+tv132 = 2584
+tv79 = 2584
+tv442 = 2592
+tv440 = 2592
+tv436 = 2592
+tv433 = 2592
+tv438 = 2600
+__$ArrayPad$ = 2608
 main$dtor$13 PROC
 	mov	QWORD PTR [rsp+8], rcx
 	mov	QWORD PTR [rsp+16], rdx
@@ -18209,24 +18349,683 @@ $T36 = 2312
 $T37 = 2344
 $T38 = 2408
 $T39 = 2440
-$T40 = 2500
-tv182 = 2516
-tv415 = 2520
-tv413 = 2520
-tv411 = 2520
-tv409 = 2520
-tv407 = 2520
-tv405 = 2520
-tv402 = 2520
-tv350 = 2520
-tv306 = 2520
-tv138 = 2520
-tv132 = 2520
-tv425 = 2528
-tv421 = 2528
-tv418 = 2528
-tv423 = 2536
-__$ArrayPad$ = 2544
+$T40 = 2504
+$T41 = 2564
+tv182 = 2580
+tv430 = 2584
+tv428 = 2584
+tv426 = 2584
+tv424 = 2584
+tv422 = 2584
+tv420 = 2584
+tv417 = 2584
+tv350 = 2584
+tv306 = 2584
+tv138 = 2584
+tv132 = 2584
+tv79 = 2584
+tv442 = 2592
+tv440 = 2592
+tv436 = 2592
+tv433 = 2592
+tv438 = 2600
+__$ArrayPad$ = 2608
+main$dtor$15 PROC
+	mov	QWORD PTR [rsp+8], rcx
+	mov	QWORD PTR [rsp+16], rdx
+	push	rbp
+	push	rdi
+	sub	rsp, 40					; 00000028H
+	lea	rbp, QWORD PTR [rdx+32]
+	lea	rcx, QWORD PTR $T39[rbp]
+	call	??1?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@QEAA@XZ ; std::basic_string<char,std::char_traits<char>,std::allocator<char> >::~basic_string<char,std::char_traits<char>,std::allocator<char> >
+	add	rsp, 40					; 00000028H
+	pop	rdi
+	pop	rbp
+	ret	0
+main$dtor$15 ENDP
+text$x	ENDS
+;	COMDAT text$x
+text$x	SEGMENT
+supportedOps$ = 4
+eq$ = 40
+ii$10 = 68
+eqptr$11 = 104
+tok$12 = 136
+manager$13 = 192
+prevChar$14 = 324
+toklocal$15 = 360
+builder$16 = 432
+result$17 = 520
+builder2$ = 560
+r_result$ = 648
+$T18 = 1448
+$T19 = 1480
+$T20 = 1512
+$T21 = 1576
+$T22 = 1608
+$T23 = 1672
+$T24 = 1704
+$T25 = 1768
+$T26 = 1800
+$T27 = 1864
+$T28 = 1896
+$T29 = 1960
+$T30 = 1992
+$T31 = 2056
+$T32 = 2088
+$T33 = 2152
+$T34 = 2184
+$T35 = 2248
+$T36 = 2312
+$T37 = 2344
+$T38 = 2408
+$T39 = 2440
+$T40 = 2504
+$T41 = 2564
+tv182 = 2580
+tv430 = 2584
+tv428 = 2584
+tv426 = 2584
+tv424 = 2584
+tv422 = 2584
+tv420 = 2584
+tv417 = 2584
+tv350 = 2584
+tv306 = 2584
+tv138 = 2584
+tv132 = 2584
+tv79 = 2584
+tv442 = 2592
+tv440 = 2592
+tv436 = 2592
+tv433 = 2592
+tv438 = 2600
+__$ArrayPad$ = 2608
+main$dtor$16 PROC
+	mov	QWORD PTR [rsp+8], rcx
+	mov	QWORD PTR [rsp+16], rdx
+	push	rbp
+	push	rdi
+	sub	rsp, 40					; 00000028H
+	lea	rbp, QWORD PTR [rdx+32]
+	lea	rcx, QWORD PTR $T40[rbp]
+	call	??1?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@QEAA@XZ ; std::basic_string<char,std::char_traits<char>,std::allocator<char> >::~basic_string<char,std::char_traits<char>,std::allocator<char> >
+	add	rsp, 40					; 00000028H
+	pop	rdi
+	pop	rbp
+	ret	0
+main$dtor$16 ENDP
+text$x	ENDS
+; Function compile flags: /Odtp /RTCsu /ZI
+;	COMDAT text$x
+text$x	SEGMENT
+supportedOps$ = 4
+eq$ = 40
+ii$10 = 68
+eqptr$11 = 104
+tok$12 = 136
+manager$13 = 192
+prevChar$14 = 324
+toklocal$15 = 360
+builder$16 = 432
+result$17 = 520
+builder2$ = 560
+r_result$ = 648
+$T18 = 1448
+$T19 = 1480
+$T20 = 1512
+$T21 = 1576
+$T22 = 1608
+$T23 = 1672
+$T24 = 1704
+$T25 = 1768
+$T26 = 1800
+$T27 = 1864
+$T28 = 1896
+$T29 = 1960
+$T30 = 1992
+$T31 = 2056
+$T32 = 2088
+$T33 = 2152
+$T34 = 2184
+$T35 = 2248
+$T36 = 2312
+$T37 = 2344
+$T38 = 2408
+$T39 = 2440
+$T40 = 2504
+$T41 = 2564
+tv182 = 2580
+tv430 = 2584
+tv428 = 2584
+tv426 = 2584
+tv424 = 2584
+tv422 = 2584
+tv420 = 2584
+tv417 = 2584
+tv350 = 2584
+tv306 = 2584
+tv138 = 2584
+tv132 = 2584
+tv79 = 2584
+tv442 = 2592
+tv440 = 2592
+tv436 = 2592
+tv433 = 2592
+tv438 = 2600
+__$ArrayPad$ = 2608
+main$dtor$0 PROC
+	mov	QWORD PTR [rsp+8], rcx
+	mov	QWORD PTR [rsp+16], rdx
+	push	rbp
+	push	rdi
+	sub	rsp, 40					; 00000028H
+	lea	rbp, QWORD PTR [rdx+32]
+	lea	rcx, QWORD PTR tok$12[rbp]
+	call	??1token@@QEAA@XZ			; token::~token
+	add	rsp, 40					; 00000028H
+	pop	rdi
+	pop	rbp
+	ret	0
+main$dtor$0 ENDP
+text$x	ENDS
+; Function compile flags: /Odtp /RTCsu /ZI
+;	COMDAT text$x
+text$x	SEGMENT
+supportedOps$ = 4
+eq$ = 40
+ii$10 = 68
+eqptr$11 = 104
+tok$12 = 136
+manager$13 = 192
+prevChar$14 = 324
+toklocal$15 = 360
+builder$16 = 432
+result$17 = 520
+builder2$ = 560
+r_result$ = 648
+$T18 = 1448
+$T19 = 1480
+$T20 = 1512
+$T21 = 1576
+$T22 = 1608
+$T23 = 1672
+$T24 = 1704
+$T25 = 1768
+$T26 = 1800
+$T27 = 1864
+$T28 = 1896
+$T29 = 1960
+$T30 = 1992
+$T31 = 2056
+$T32 = 2088
+$T33 = 2152
+$T34 = 2184
+$T35 = 2248
+$T36 = 2312
+$T37 = 2344
+$T38 = 2408
+$T39 = 2440
+$T40 = 2504
+$T41 = 2564
+tv182 = 2580
+tv430 = 2584
+tv428 = 2584
+tv426 = 2584
+tv424 = 2584
+tv422 = 2584
+tv420 = 2584
+tv417 = 2584
+tv350 = 2584
+tv306 = 2584
+tv138 = 2584
+tv132 = 2584
+tv79 = 2584
+tv442 = 2592
+tv440 = 2592
+tv436 = 2592
+tv433 = 2592
+tv438 = 2600
+__$ArrayPad$ = 2608
+main$dtor$1 PROC
+	mov	QWORD PTR [rsp+8], rcx
+	mov	QWORD PTR [rsp+16], rdx
+	push	rbp
+	push	rdi
+	sub	rsp, 40					; 00000028H
+	lea	rbp, QWORD PTR [rdx+32]
+	lea	rcx, QWORD PTR manager$13[rbp]
+	call	??1expression@@QEAA@XZ
+	add	rsp, 40					; 00000028H
+	pop	rdi
+	pop	rbp
+	ret	0
+main$dtor$1 ENDP
+text$x	ENDS
+; Function compile flags: /Odtp /RTCsu /ZI
+;	COMDAT text$x
+text$x	SEGMENT
+supportedOps$ = 4
+eq$ = 40
+ii$10 = 68
+eqptr$11 = 104
+tok$12 = 136
+manager$13 = 192
+prevChar$14 = 324
+toklocal$15 = 360
+builder$16 = 432
+result$17 = 520
+builder2$ = 560
+r_result$ = 648
+$T18 = 1448
+$T19 = 1480
+$T20 = 1512
+$T21 = 1576
+$T22 = 1608
+$T23 = 1672
+$T24 = 1704
+$T25 = 1768
+$T26 = 1800
+$T27 = 1864
+$T28 = 1896
+$T29 = 1960
+$T30 = 1992
+$T31 = 2056
+$T32 = 2088
+$T33 = 2152
+$T34 = 2184
+$T35 = 2248
+$T36 = 2312
+$T37 = 2344
+$T38 = 2408
+$T39 = 2440
+$T40 = 2504
+$T41 = 2564
+tv182 = 2580
+tv430 = 2584
+tv428 = 2584
+tv426 = 2584
+tv424 = 2584
+tv422 = 2584
+tv420 = 2584
+tv417 = 2584
+tv350 = 2584
+tv306 = 2584
+tv138 = 2584
+tv132 = 2584
+tv79 = 2584
+tv442 = 2592
+tv440 = 2592
+tv436 = 2592
+tv433 = 2592
+tv438 = 2600
+__$ArrayPad$ = 2608
+main$dtor$2 PROC
+	mov	QWORD PTR [rsp+8], rcx
+	mov	QWORD PTR [rsp+16], rdx
+	push	rbp
+	push	rdi
+	sub	rsp, 40					; 00000028H
+	lea	rbp, QWORD PTR [rdx+32]
+	lea	rcx, QWORD PTR toklocal$15[rbp]
+	call	??1?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@QEAA@XZ ; std::basic_string<char,std::char_traits<char>,std::allocator<char> >::~basic_string<char,std::char_traits<char>,std::allocator<char> >
+	add	rsp, 40					; 00000028H
+	pop	rdi
+	pop	rbp
+	ret	0
+main$dtor$2 ENDP
+text$x	ENDS
+; Function compile flags: /Odtp /RTCsu /ZI
+;	COMDAT text$x
+text$x	SEGMENT
+supportedOps$ = 4
+eq$ = 40
+ii$10 = 68
+eqptr$11 = 104
+tok$12 = 136
+manager$13 = 192
+prevChar$14 = 324
+toklocal$15 = 360
+builder$16 = 432
+result$17 = 520
+builder2$ = 560
+r_result$ = 648
+$T18 = 1448
+$T19 = 1480
+$T20 = 1512
+$T21 = 1576
+$T22 = 1608
+$T23 = 1672
+$T24 = 1704
+$T25 = 1768
+$T26 = 1800
+$T27 = 1864
+$T28 = 1896
+$T29 = 1960
+$T30 = 1992
+$T31 = 2056
+$T32 = 2088
+$T33 = 2152
+$T34 = 2184
+$T35 = 2248
+$T36 = 2312
+$T37 = 2344
+$T38 = 2408
+$T39 = 2440
+$T40 = 2504
+$T41 = 2564
+tv182 = 2580
+tv430 = 2584
+tv428 = 2584
+tv426 = 2584
+tv424 = 2584
+tv422 = 2584
+tv420 = 2584
+tv417 = 2584
+tv350 = 2584
+tv306 = 2584
+tv138 = 2584
+tv132 = 2584
+tv79 = 2584
+tv442 = 2592
+tv440 = 2592
+tv436 = 2592
+tv433 = 2592
+tv438 = 2600
+__$ArrayPad$ = 2608
+main$dtor$10 PROC
+	mov	QWORD PTR [rsp+8], rcx
+	mov	QWORD PTR [rsp+16], rdx
+	push	rbp
+	push	rdi
+	sub	rsp, 40					; 00000028H
+	lea	rbp, QWORD PTR [rdx+32]
+	lea	rcx, QWORD PTR builder$16[rbp]
+	call	??1tree_builder@@QEAA@XZ
+	add	rsp, 40					; 00000028H
+	pop	rdi
+	pop	rbp
+	ret	0
+main$dtor$10 ENDP
+text$x	ENDS
+; Function compile flags: /Odtp /RTCsu /ZI
+;	COMDAT text$x
+text$x	SEGMENT
+supportedOps$ = 4
+eq$ = 40
+ii$10 = 68
+eqptr$11 = 104
+tok$12 = 136
+manager$13 = 192
+prevChar$14 = 324
+toklocal$15 = 360
+builder$16 = 432
+result$17 = 520
+builder2$ = 560
+r_result$ = 648
+$T18 = 1448
+$T19 = 1480
+$T20 = 1512
+$T21 = 1576
+$T22 = 1608
+$T23 = 1672
+$T24 = 1704
+$T25 = 1768
+$T26 = 1800
+$T27 = 1864
+$T28 = 1896
+$T29 = 1960
+$T30 = 1992
+$T31 = 2056
+$T32 = 2088
+$T33 = 2152
+$T34 = 2184
+$T35 = 2248
+$T36 = 2312
+$T37 = 2344
+$T38 = 2408
+$T39 = 2440
+$T40 = 2504
+$T41 = 2564
+tv182 = 2580
+tv430 = 2584
+tv428 = 2584
+tv426 = 2584
+tv424 = 2584
+tv422 = 2584
+tv420 = 2584
+tv417 = 2584
+tv350 = 2584
+tv306 = 2584
+tv138 = 2584
+tv132 = 2584
+tv79 = 2584
+tv442 = 2592
+tv440 = 2592
+tv436 = 2592
+tv433 = 2592
+tv438 = 2600
+__$ArrayPad$ = 2608
+main$dtor$11 PROC
+	mov	QWORD PTR [rsp+8], rcx
+	mov	QWORD PTR [rsp+16], rdx
+	push	rbp
+	push	rdi
+	sub	rsp, 40					; 00000028H
+	lea	rbp, QWORD PTR [rdx+32]
+	lea	rcx, QWORD PTR $T34[rbp]
+	call	??1?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@QEAA@XZ ; std::basic_string<char,std::char_traits<char>,std::allocator<char> >::~basic_string<char,std::char_traits<char>,std::allocator<char> >
+	add	rsp, 40					; 00000028H
+	pop	rdi
+	pop	rbp
+	ret	0
+main$dtor$11 ENDP
+text$x	ENDS
+; Function compile flags: /Odtp /RTCsu /ZI
+;	COMDAT text$x
+text$x	SEGMENT
+supportedOps$ = 4
+eq$ = 40
+ii$10 = 68
+eqptr$11 = 104
+tok$12 = 136
+manager$13 = 192
+prevChar$14 = 324
+toklocal$15 = 360
+builder$16 = 432
+result$17 = 520
+builder2$ = 560
+r_result$ = 648
+$T18 = 1448
+$T19 = 1480
+$T20 = 1512
+$T21 = 1576
+$T22 = 1608
+$T23 = 1672
+$T24 = 1704
+$T25 = 1768
+$T26 = 1800
+$T27 = 1864
+$T28 = 1896
+$T29 = 1960
+$T30 = 1992
+$T31 = 2056
+$T32 = 2088
+$T33 = 2152
+$T34 = 2184
+$T35 = 2248
+$T36 = 2312
+$T37 = 2344
+$T38 = 2408
+$T39 = 2440
+$T40 = 2504
+$T41 = 2564
+tv182 = 2580
+tv430 = 2584
+tv428 = 2584
+tv426 = 2584
+tv424 = 2584
+tv422 = 2584
+tv420 = 2584
+tv417 = 2584
+tv350 = 2584
+tv306 = 2584
+tv138 = 2584
+tv132 = 2584
+tv79 = 2584
+tv442 = 2592
+tv440 = 2592
+tv436 = 2592
+tv433 = 2592
+tv438 = 2600
+__$ArrayPad$ = 2608
+main$dtor$12 PROC
+	mov	QWORD PTR [rsp+8], rcx
+	mov	QWORD PTR [rsp+16], rdx
+	push	rbp
+	push	rdi
+	sub	rsp, 40					; 00000028H
+	lea	rbp, QWORD PTR [rdx+32]
+	lea	rcx, QWORD PTR builder2$[rbp]
+	call	??1tree_builder@@QEAA@XZ
+	add	rsp, 40					; 00000028H
+	pop	rdi
+	pop	rbp
+	ret	0
+main$dtor$12 ENDP
+text$x	ENDS
+; Function compile flags: /Odtp /RTCsu /ZI
+;	COMDAT text$x
+text$x	SEGMENT
+supportedOps$ = 4
+eq$ = 40
+ii$10 = 68
+eqptr$11 = 104
+tok$12 = 136
+manager$13 = 192
+prevChar$14 = 324
+toklocal$15 = 360
+builder$16 = 432
+result$17 = 520
+builder2$ = 560
+r_result$ = 648
+$T18 = 1448
+$T19 = 1480
+$T20 = 1512
+$T21 = 1576
+$T22 = 1608
+$T23 = 1672
+$T24 = 1704
+$T25 = 1768
+$T26 = 1800
+$T27 = 1864
+$T28 = 1896
+$T29 = 1960
+$T30 = 1992
+$T31 = 2056
+$T32 = 2088
+$T33 = 2152
+$T34 = 2184
+$T35 = 2248
+$T36 = 2312
+$T37 = 2344
+$T38 = 2408
+$T39 = 2440
+$T40 = 2504
+$T41 = 2564
+tv182 = 2580
+tv430 = 2584
+tv428 = 2584
+tv426 = 2584
+tv424 = 2584
+tv422 = 2584
+tv420 = 2584
+tv417 = 2584
+tv350 = 2584
+tv306 = 2584
+tv138 = 2584
+tv132 = 2584
+tv79 = 2584
+tv442 = 2592
+tv440 = 2592
+tv436 = 2592
+tv433 = 2592
+tv438 = 2600
+__$ArrayPad$ = 2608
+main$dtor$13 PROC
+	mov	QWORD PTR [rsp+8], rcx
+	mov	QWORD PTR [rsp+16], rdx
+	push	rbp
+	push	rdi
+	sub	rsp, 40					; 00000028H
+	lea	rbp, QWORD PTR [rdx+32]
+	mov	rcx, QWORD PTR $T36[rbp]
+	call	??1?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@QEAA@XZ ; std::basic_string<char,std::char_traits<char>,std::allocator<char> >::~basic_string<char,std::char_traits<char>,std::allocator<char> >
+	add	rsp, 40					; 00000028H
+	pop	rdi
+	pop	rbp
+	ret	0
+main$dtor$13 ENDP
+text$x	ENDS
+; Function compile flags: /Odtp /RTCsu /ZI
+;	COMDAT text$x
+text$x	SEGMENT
+supportedOps$ = 4
+eq$ = 40
+ii$10 = 68
+eqptr$11 = 104
+tok$12 = 136
+manager$13 = 192
+prevChar$14 = 324
+toklocal$15 = 360
+builder$16 = 432
+result$17 = 520
+builder2$ = 560
+r_result$ = 648
+$T18 = 1448
+$T19 = 1480
+$T20 = 1512
+$T21 = 1576
+$T22 = 1608
+$T23 = 1672
+$T24 = 1704
+$T25 = 1768
+$T26 = 1800
+$T27 = 1864
+$T28 = 1896
+$T29 = 1960
+$T30 = 1992
+$T31 = 2056
+$T32 = 2088
+$T33 = 2152
+$T34 = 2184
+$T35 = 2248
+$T36 = 2312
+$T37 = 2344
+$T38 = 2408
+$T39 = 2440
+$T40 = 2504
+$T41 = 2564
+tv182 = 2580
+tv430 = 2584
+tv428 = 2584
+tv426 = 2584
+tv424 = 2584
+tv422 = 2584
+tv420 = 2584
+tv417 = 2584
+tv350 = 2584
+tv306 = 2584
+tv138 = 2584
+tv132 = 2584
+tv79 = 2584
+tv442 = 2592
+tv440 = 2592
+tv436 = 2592
+tv433 = 2592
+tv438 = 2600
+__$ArrayPad$ = 2608
 main$dtor$15 PROC
 	mov	QWORD PTR [rsp+8], rcx
 	mov	QWORD PTR [rsp+16], rdx
@@ -18279,528 +19078,41 @@ $T36 = 2312
 $T37 = 2344
 $T38 = 2408
 $T39 = 2440
-$T40 = 2500
-tv182 = 2516
-tv415 = 2520
-tv413 = 2520
-tv411 = 2520
-tv409 = 2520
-tv407 = 2520
-tv405 = 2520
-tv402 = 2520
-tv350 = 2520
-tv306 = 2520
-tv138 = 2520
-tv132 = 2520
-tv425 = 2528
-tv421 = 2528
-tv418 = 2528
-tv423 = 2536
-__$ArrayPad$ = 2544
-main$dtor$0 PROC
+$T40 = 2504
+$T41 = 2564
+tv182 = 2580
+tv430 = 2584
+tv428 = 2584
+tv426 = 2584
+tv424 = 2584
+tv422 = 2584
+tv420 = 2584
+tv417 = 2584
+tv350 = 2584
+tv306 = 2584
+tv138 = 2584
+tv132 = 2584
+tv79 = 2584
+tv442 = 2592
+tv440 = 2592
+tv436 = 2592
+tv433 = 2592
+tv438 = 2600
+__$ArrayPad$ = 2608
+main$dtor$16 PROC
 	mov	QWORD PTR [rsp+8], rcx
 	mov	QWORD PTR [rsp+16], rdx
 	push	rbp
 	push	rdi
 	sub	rsp, 40					; 00000028H
 	lea	rbp, QWORD PTR [rdx+32]
-	lea	rcx, QWORD PTR tok$12[rbp]
-	call	??1token@@QEAA@XZ			; token::~token
-	add	rsp, 40					; 00000028H
-	pop	rdi
-	pop	rbp
-	ret	0
-main$dtor$0 ENDP
-text$x	ENDS
-; Function compile flags: /Odtp /RTCsu /ZI
-;	COMDAT text$x
-text$x	SEGMENT
-supportedOps$ = 4
-eq$ = 40
-ii$10 = 68
-eqptr$11 = 104
-tok$12 = 136
-manager$13 = 192
-prevChar$14 = 324
-toklocal$15 = 360
-builder$16 = 432
-result$17 = 520
-builder2$ = 560
-r_result$ = 648
-$T18 = 1448
-$T19 = 1480
-$T20 = 1512
-$T21 = 1576
-$T22 = 1608
-$T23 = 1672
-$T24 = 1704
-$T25 = 1768
-$T26 = 1800
-$T27 = 1864
-$T28 = 1896
-$T29 = 1960
-$T30 = 1992
-$T31 = 2056
-$T32 = 2088
-$T33 = 2152
-$T34 = 2184
-$T35 = 2248
-$T36 = 2312
-$T37 = 2344
-$T38 = 2408
-$T39 = 2440
-$T40 = 2500
-tv182 = 2516
-tv415 = 2520
-tv413 = 2520
-tv411 = 2520
-tv409 = 2520
-tv407 = 2520
-tv405 = 2520
-tv402 = 2520
-tv350 = 2520
-tv306 = 2520
-tv138 = 2520
-tv132 = 2520
-tv425 = 2528
-tv421 = 2528
-tv418 = 2528
-tv423 = 2536
-__$ArrayPad$ = 2544
-main$dtor$1 PROC
-	mov	QWORD PTR [rsp+8], rcx
-	mov	QWORD PTR [rsp+16], rdx
-	push	rbp
-	push	rdi
-	sub	rsp, 40					; 00000028H
-	lea	rbp, QWORD PTR [rdx+32]
-	lea	rcx, QWORD PTR manager$13[rbp]
-	call	??1expression@@QEAA@XZ
-	add	rsp, 40					; 00000028H
-	pop	rdi
-	pop	rbp
-	ret	0
-main$dtor$1 ENDP
-text$x	ENDS
-; Function compile flags: /Odtp /RTCsu /ZI
-;	COMDAT text$x
-text$x	SEGMENT
-supportedOps$ = 4
-eq$ = 40
-ii$10 = 68
-eqptr$11 = 104
-tok$12 = 136
-manager$13 = 192
-prevChar$14 = 324
-toklocal$15 = 360
-builder$16 = 432
-result$17 = 520
-builder2$ = 560
-r_result$ = 648
-$T18 = 1448
-$T19 = 1480
-$T20 = 1512
-$T21 = 1576
-$T22 = 1608
-$T23 = 1672
-$T24 = 1704
-$T25 = 1768
-$T26 = 1800
-$T27 = 1864
-$T28 = 1896
-$T29 = 1960
-$T30 = 1992
-$T31 = 2056
-$T32 = 2088
-$T33 = 2152
-$T34 = 2184
-$T35 = 2248
-$T36 = 2312
-$T37 = 2344
-$T38 = 2408
-$T39 = 2440
-$T40 = 2500
-tv182 = 2516
-tv415 = 2520
-tv413 = 2520
-tv411 = 2520
-tv409 = 2520
-tv407 = 2520
-tv405 = 2520
-tv402 = 2520
-tv350 = 2520
-tv306 = 2520
-tv138 = 2520
-tv132 = 2520
-tv425 = 2528
-tv421 = 2528
-tv418 = 2528
-tv423 = 2536
-__$ArrayPad$ = 2544
-main$dtor$2 PROC
-	mov	QWORD PTR [rsp+8], rcx
-	mov	QWORD PTR [rsp+16], rdx
-	push	rbp
-	push	rdi
-	sub	rsp, 40					; 00000028H
-	lea	rbp, QWORD PTR [rdx+32]
-	lea	rcx, QWORD PTR toklocal$15[rbp]
+	lea	rcx, QWORD PTR $T40[rbp]
 	call	??1?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@QEAA@XZ ; std::basic_string<char,std::char_traits<char>,std::allocator<char> >::~basic_string<char,std::char_traits<char>,std::allocator<char> >
 	add	rsp, 40					; 00000028H
 	pop	rdi
 	pop	rbp
 	ret	0
-main$dtor$2 ENDP
-text$x	ENDS
-; Function compile flags: /Odtp /RTCsu /ZI
-;	COMDAT text$x
-text$x	SEGMENT
-supportedOps$ = 4
-eq$ = 40
-ii$10 = 68
-eqptr$11 = 104
-tok$12 = 136
-manager$13 = 192
-prevChar$14 = 324
-toklocal$15 = 360
-builder$16 = 432
-result$17 = 520
-builder2$ = 560
-r_result$ = 648
-$T18 = 1448
-$T19 = 1480
-$T20 = 1512
-$T21 = 1576
-$T22 = 1608
-$T23 = 1672
-$T24 = 1704
-$T25 = 1768
-$T26 = 1800
-$T27 = 1864
-$T28 = 1896
-$T29 = 1960
-$T30 = 1992
-$T31 = 2056
-$T32 = 2088
-$T33 = 2152
-$T34 = 2184
-$T35 = 2248
-$T36 = 2312
-$T37 = 2344
-$T38 = 2408
-$T39 = 2440
-$T40 = 2500
-tv182 = 2516
-tv415 = 2520
-tv413 = 2520
-tv411 = 2520
-tv409 = 2520
-tv407 = 2520
-tv405 = 2520
-tv402 = 2520
-tv350 = 2520
-tv306 = 2520
-tv138 = 2520
-tv132 = 2520
-tv425 = 2528
-tv421 = 2528
-tv418 = 2528
-tv423 = 2536
-__$ArrayPad$ = 2544
-main$dtor$10 PROC
-	mov	QWORD PTR [rsp+8], rcx
-	mov	QWORD PTR [rsp+16], rdx
-	push	rbp
-	push	rdi
-	sub	rsp, 40					; 00000028H
-	lea	rbp, QWORD PTR [rdx+32]
-	lea	rcx, QWORD PTR builder$16[rbp]
-	call	??1tree_builder@@QEAA@XZ
-	add	rsp, 40					; 00000028H
-	pop	rdi
-	pop	rbp
-	ret	0
-main$dtor$10 ENDP
-text$x	ENDS
-; Function compile flags: /Odtp /RTCsu /ZI
-;	COMDAT text$x
-text$x	SEGMENT
-supportedOps$ = 4
-eq$ = 40
-ii$10 = 68
-eqptr$11 = 104
-tok$12 = 136
-manager$13 = 192
-prevChar$14 = 324
-toklocal$15 = 360
-builder$16 = 432
-result$17 = 520
-builder2$ = 560
-r_result$ = 648
-$T18 = 1448
-$T19 = 1480
-$T20 = 1512
-$T21 = 1576
-$T22 = 1608
-$T23 = 1672
-$T24 = 1704
-$T25 = 1768
-$T26 = 1800
-$T27 = 1864
-$T28 = 1896
-$T29 = 1960
-$T30 = 1992
-$T31 = 2056
-$T32 = 2088
-$T33 = 2152
-$T34 = 2184
-$T35 = 2248
-$T36 = 2312
-$T37 = 2344
-$T38 = 2408
-$T39 = 2440
-$T40 = 2500
-tv182 = 2516
-tv415 = 2520
-tv413 = 2520
-tv411 = 2520
-tv409 = 2520
-tv407 = 2520
-tv405 = 2520
-tv402 = 2520
-tv350 = 2520
-tv306 = 2520
-tv138 = 2520
-tv132 = 2520
-tv425 = 2528
-tv421 = 2528
-tv418 = 2528
-tv423 = 2536
-__$ArrayPad$ = 2544
-main$dtor$11 PROC
-	mov	QWORD PTR [rsp+8], rcx
-	mov	QWORD PTR [rsp+16], rdx
-	push	rbp
-	push	rdi
-	sub	rsp, 40					; 00000028H
-	lea	rbp, QWORD PTR [rdx+32]
-	lea	rcx, QWORD PTR $T34[rbp]
-	call	??1?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@QEAA@XZ ; std::basic_string<char,std::char_traits<char>,std::allocator<char> >::~basic_string<char,std::char_traits<char>,std::allocator<char> >
-	add	rsp, 40					; 00000028H
-	pop	rdi
-	pop	rbp
-	ret	0
-main$dtor$11 ENDP
-text$x	ENDS
-; Function compile flags: /Odtp /RTCsu /ZI
-;	COMDAT text$x
-text$x	SEGMENT
-supportedOps$ = 4
-eq$ = 40
-ii$10 = 68
-eqptr$11 = 104
-tok$12 = 136
-manager$13 = 192
-prevChar$14 = 324
-toklocal$15 = 360
-builder$16 = 432
-result$17 = 520
-builder2$ = 560
-r_result$ = 648
-$T18 = 1448
-$T19 = 1480
-$T20 = 1512
-$T21 = 1576
-$T22 = 1608
-$T23 = 1672
-$T24 = 1704
-$T25 = 1768
-$T26 = 1800
-$T27 = 1864
-$T28 = 1896
-$T29 = 1960
-$T30 = 1992
-$T31 = 2056
-$T32 = 2088
-$T33 = 2152
-$T34 = 2184
-$T35 = 2248
-$T36 = 2312
-$T37 = 2344
-$T38 = 2408
-$T39 = 2440
-$T40 = 2500
-tv182 = 2516
-tv415 = 2520
-tv413 = 2520
-tv411 = 2520
-tv409 = 2520
-tv407 = 2520
-tv405 = 2520
-tv402 = 2520
-tv350 = 2520
-tv306 = 2520
-tv138 = 2520
-tv132 = 2520
-tv425 = 2528
-tv421 = 2528
-tv418 = 2528
-tv423 = 2536
-__$ArrayPad$ = 2544
-main$dtor$12 PROC
-	mov	QWORD PTR [rsp+8], rcx
-	mov	QWORD PTR [rsp+16], rdx
-	push	rbp
-	push	rdi
-	sub	rsp, 40					; 00000028H
-	lea	rbp, QWORD PTR [rdx+32]
-	lea	rcx, QWORD PTR builder2$[rbp]
-	call	??1tree_builder@@QEAA@XZ
-	add	rsp, 40					; 00000028H
-	pop	rdi
-	pop	rbp
-	ret	0
-main$dtor$12 ENDP
-text$x	ENDS
-; Function compile flags: /Odtp /RTCsu /ZI
-;	COMDAT text$x
-text$x	SEGMENT
-supportedOps$ = 4
-eq$ = 40
-ii$10 = 68
-eqptr$11 = 104
-tok$12 = 136
-manager$13 = 192
-prevChar$14 = 324
-toklocal$15 = 360
-builder$16 = 432
-result$17 = 520
-builder2$ = 560
-r_result$ = 648
-$T18 = 1448
-$T19 = 1480
-$T20 = 1512
-$T21 = 1576
-$T22 = 1608
-$T23 = 1672
-$T24 = 1704
-$T25 = 1768
-$T26 = 1800
-$T27 = 1864
-$T28 = 1896
-$T29 = 1960
-$T30 = 1992
-$T31 = 2056
-$T32 = 2088
-$T33 = 2152
-$T34 = 2184
-$T35 = 2248
-$T36 = 2312
-$T37 = 2344
-$T38 = 2408
-$T39 = 2440
-$T40 = 2500
-tv182 = 2516
-tv415 = 2520
-tv413 = 2520
-tv411 = 2520
-tv409 = 2520
-tv407 = 2520
-tv405 = 2520
-tv402 = 2520
-tv350 = 2520
-tv306 = 2520
-tv138 = 2520
-tv132 = 2520
-tv425 = 2528
-tv421 = 2528
-tv418 = 2528
-tv423 = 2536
-__$ArrayPad$ = 2544
-main$dtor$13 PROC
-	mov	QWORD PTR [rsp+8], rcx
-	mov	QWORD PTR [rsp+16], rdx
-	push	rbp
-	push	rdi
-	sub	rsp, 40					; 00000028H
-	lea	rbp, QWORD PTR [rdx+32]
-	mov	rcx, QWORD PTR $T36[rbp]
-	call	??1?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@QEAA@XZ ; std::basic_string<char,std::char_traits<char>,std::allocator<char> >::~basic_string<char,std::char_traits<char>,std::allocator<char> >
-	add	rsp, 40					; 00000028H
-	pop	rdi
-	pop	rbp
-	ret	0
-main$dtor$13 ENDP
-text$x	ENDS
-; Function compile flags: /Odtp /RTCsu /ZI
-;	COMDAT text$x
-text$x	SEGMENT
-supportedOps$ = 4
-eq$ = 40
-ii$10 = 68
-eqptr$11 = 104
-tok$12 = 136
-manager$13 = 192
-prevChar$14 = 324
-toklocal$15 = 360
-builder$16 = 432
-result$17 = 520
-builder2$ = 560
-r_result$ = 648
-$T18 = 1448
-$T19 = 1480
-$T20 = 1512
-$T21 = 1576
-$T22 = 1608
-$T23 = 1672
-$T24 = 1704
-$T25 = 1768
-$T26 = 1800
-$T27 = 1864
-$T28 = 1896
-$T29 = 1960
-$T30 = 1992
-$T31 = 2056
-$T32 = 2088
-$T33 = 2152
-$T34 = 2184
-$T35 = 2248
-$T36 = 2312
-$T37 = 2344
-$T38 = 2408
-$T39 = 2440
-$T40 = 2500
-tv182 = 2516
-tv415 = 2520
-tv413 = 2520
-tv411 = 2520
-tv409 = 2520
-tv407 = 2520
-tv405 = 2520
-tv402 = 2520
-tv350 = 2520
-tv306 = 2520
-tv138 = 2520
-tv132 = 2520
-tv425 = 2528
-tv421 = 2528
-tv418 = 2528
-tv423 = 2536
-__$ArrayPad$ = 2544
-main$dtor$15 PROC
-	mov	QWORD PTR [rsp+8], rcx
-	mov	QWORD PTR [rsp+16], rdx
-	push	rbp
-	push	rdi
-	sub	rsp, 40					; 00000028H
-	lea	rbp, QWORD PTR [rdx+32]
-	lea	rcx, QWORD PTR $T39[rbp]
-	call	??1?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@QEAA@XZ ; std::basic_string<char,std::char_traits<char>,std::allocator<char> >::~basic_string<char,std::char_traits<char>,std::allocator<char> >
-	add	rsp, 40					; 00000028H
-	pop	rdi
-	pop	rbp
-	ret	0
-main$dtor$15 ENDP
+main$dtor$16 ENDP
 text$x	ENDS
 ; Function compile flags: /Odtp /RTCsu /ZI
 ; File C:\Users\shtuk\Desktop\Files\EquationStringParser\EquationStringParser\EquationStringParser.cpp
@@ -19485,7 +19797,7 @@ y$ = 304
 z$ = 312
 ?calc@tree_builder@@QEAANNNN@Z PROC			; tree_builder::calc, COMDAT
 
-; 383  : 	{
+; 429  : 	{
 
 $LN3:
 	movsd	QWORD PTR [rsp+32], xmm3
@@ -19499,27 +19811,27 @@ $LN3:
 	lea	rcx, OFFSET FLAT:__3F6EDB1A_tree_builder@h
 	call	__CheckForDebuggerJustMyCode
 
-; 384  : 		this->x = x;
+; 430  : 		this->x = x;
 
 	mov	rax, QWORD PTR this$[rbp]
 	movsd	xmm0, QWORD PTR x$[rbp]
 	movsd	QWORD PTR [rax+40], xmm0
 
-; 385  : 		this->y = y;
+; 431  : 		this->y = y;
 
 	mov	rax, QWORD PTR this$[rbp]
 	movsd	xmm0, QWORD PTR y$[rbp]
 	movsd	QWORD PTR [rax+48], xmm0
 
-; 386  : 		this->z = z;
+; 432  : 		this->z = z;
 
 	mov	rax, QWORD PTR this$[rbp]
 	movsd	xmm0, QWORD PTR z$[rbp]
 	movsd	QWORD PTR [rax+56], xmm0
 
-; 387  : 
-; 388  : 
-; 389  : 		node* firstNode = tree.nodes.front();
+; 433  : 
+; 434  : 
+; 435  : 		node* firstNode = tree.nodes.front();
 
 	mov	rax, QWORD PTR this$[rbp]
 	add	rax, 8
@@ -19528,20 +19840,20 @@ $LN3:
 	mov	rax, QWORD PTR [rax]
 	mov	QWORD PTR firstNode$[rbp], rax
 
-; 390  : 
-; 391  : 		double result = calcNode(firstNode);
+; 436  : 
+; 437  : 		double result = calcNode(firstNode);
 
 	mov	rdx, QWORD PTR firstNode$[rbp]
 	mov	rcx, QWORD PTR this$[rbp]
 	call	?calcNode@tree_builder@@QEAANPEAVnode@@@Z ; tree_builder::calcNode
 	movsd	QWORD PTR result$[rbp], xmm0
 
-; 392  : 
-; 393  : 		return result;
+; 438  : 
+; 439  : 		return result;
 
 	movsd	xmm0, QWORD PTR result$[rbp]
 
-; 394  : 	}
+; 440  : 	}
 
 	lea	rsp, QWORD PTR [rbp+264]
 	pop	rdi
@@ -19565,7 +19877,7 @@ this$ = 512
 n$ = 520
 ?calcNode@tree_builder@@QEAANPEAVnode@@@Z PROC		; tree_builder::calcNode, COMDAT
 
-; 347  : 	{
+; 393  : 	{
 
 $LN13:
 	mov	QWORD PTR [rsp+16], rdx
@@ -19585,9 +19897,9 @@ $LN13:
 	lea	rcx, OFFSET FLAT:__3F6EDB1A_tree_builder@h
 	call	__CheckForDebuggerJustMyCode
 
-; 348  : 		double result;
-; 349  : 
-; 350  : 		if (n->IsConstant())
+; 394  : 		double result;
+; 395  : 
+; 396  : 		if (n->IsConstant())
 
 	mov	rcx, QWORD PTR n$[rbp]
 	call	?IsConstant@node@@QEBA_NXZ		; node::IsConstant
@@ -19595,15 +19907,15 @@ $LN13:
 	test	eax, eax
 	je	$LN2@calcNode
 
-; 351  : 		{
-; 352  : 			std::string c = n->getConstant();
+; 397  : 		{
+; 398  : 			std::string c = n->getConstant();
 
 	lea	rdx, QWORD PTR c$4[rbp]
 	mov	rcx, QWORD PTR n$[rbp]
 	call	?getConstant@node@@QEBA?AV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@XZ ; node::getConstant
 
-; 353  : 
-; 354  : 			if (c.compare("x") == 0)
+; 399  : 
+; 400  : 			if (c.compare("x") == 0)
 
 	lea	rdx, OFFSET FLAT:??_C@_01FJMABOPO@x@
 	lea	rcx, QWORD PTR c$4[rbp]
@@ -19611,19 +19923,19 @@ $LN13:
 	test	eax, eax
 	jne	SHORT $LN4@calcNode
 
-; 355  : 			{
-; 356  : 				result = x;
+; 401  : 			{
+; 402  : 				result = x;
 
 	mov	rax, QWORD PTR this$[rbp]
 	movsd	xmm0, QWORD PTR [rax+40]
 	movsd	QWORD PTR result$[rbp], xmm0
 
-; 357  : 			}
+; 403  : 			}
 
 	jmp	SHORT $LN5@calcNode
 $LN4@calcNode:
 
-; 358  : 			else if (c.compare("y") == 0)
+; 404  : 			else if (c.compare("y") == 0)
 
 	lea	rdx, OFFSET FLAT:??_C@_01EANLCPLP@y@
 	lea	rcx, QWORD PTR c$4[rbp]
@@ -19631,19 +19943,19 @@ $LN4@calcNode:
 	test	eax, eax
 	jne	SHORT $LN6@calcNode
 
-; 359  : 			{
-; 360  : 				result = y;
+; 405  : 			{
+; 406  : 				result = y;
 
 	mov	rax, QWORD PTR this$[rbp]
 	movsd	xmm0, QWORD PTR [rax+48]
 	movsd	QWORD PTR result$[rbp], xmm0
 
-; 361  : 			}
+; 407  : 			}
 
 	jmp	SHORT $LN5@calcNode
 $LN6@calcNode:
 
-; 362  : 			else if (c.compare("z") == 0)
+; 408  : 			else if (c.compare("z") == 0)
 
 	lea	rdx, OFFSET FLAT:??_C@_01GLPGHMHM@z@
 	lea	rcx, QWORD PTR c$4[rbp]
@@ -19651,21 +19963,21 @@ $LN6@calcNode:
 	test	eax, eax
 	jne	SHORT $LN8@calcNode
 
-; 363  : 			{
-; 364  : 				result = z;
+; 409  : 			{
+; 410  : 				result = z;
 
 	mov	rax, QWORD PTR this$[rbp]
 	movsd	xmm0, QWORD PTR [rax+56]
 	movsd	QWORD PTR result$[rbp], xmm0
 
-; 365  : 			}
+; 411  : 			}
 
 	jmp	SHORT $LN5@calcNode
 $LN8@calcNode:
 
-; 366  : 			else
-; 367  : 			{
-; 368  : 				result = atof(c.c_str());
+; 412  : 			else
+; 413  : 			{
+; 414  : 				result = atof(c.c_str());
 
 	lea	rcx, QWORD PTR c$4[rbp]
 	call	?c_str@?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@QEBAPEBDXZ ; std::basic_string<char,std::char_traits<char>,std::allocator<char> >::c_str
@@ -19674,17 +19986,17 @@ $LN8@calcNode:
 	movsd	QWORD PTR result$[rbp], xmm0
 $LN5@calcNode:
 
-; 369  : 			}
-; 370  : 		}
+; 415  : 			}
+; 416  : 		}
 
 	lea	rcx, QWORD PTR c$4[rbp]
 	call	??1?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@QEAA@XZ ; std::basic_string<char,std::char_traits<char>,std::allocator<char> >::~basic_string<char,std::char_traits<char>,std::allocator<char> >
 	jmp	$LN3@calcNode
 $LN2@calcNode:
 
-; 371  : 		else
-; 372  : 		{
-; 373  : 			double left = calcNode(n->left);
+; 417  : 		else
+; 418  : 		{
+; 419  : 			double left = calcNode(n->left);
 
 	mov	rax, QWORD PTR n$[rbp]
 	mov	rdx, QWORD PTR [rax+128]
@@ -19692,7 +20004,7 @@ $LN2@calcNode:
 	call	?calcNode@tree_builder@@QEAANPEAVnode@@@Z ; tree_builder::calcNode
 	movsd	QWORD PTR left$5[rbp], xmm0
 
-; 374  : 			double right = calcNode(n->right);
+; 420  : 			double right = calcNode(n->right);
 
 	mov	rax, QWORD PTR n$[rbp]
 	mov	rdx, QWORD PTR [rax+136]
@@ -19700,7 +20012,7 @@ $LN2@calcNode:
 	call	?calcNode@tree_builder@@QEAANPEAVnode@@@Z ; tree_builder::calcNode
 	movsd	QWORD PTR right$6[rbp], xmm0
 
-; 375  : 			result = performOperation(n->getOperator(), left, right);
+; 421  : 			result = performOperation(n->getOperator(), left, right);
 
 	lea	rax, QWORD PTR $T7[rbp]
 	mov	QWORD PTR $T8[rbp], rax
@@ -19716,14 +20028,14 @@ $LN2@calcNode:
 	movsd	QWORD PTR result$[rbp], xmm0
 $LN3@calcNode:
 
-; 376  : 		}
-; 377  : 
-; 378  : 
-; 379  : 		return result;
+; 422  : 		}
+; 423  : 
+; 424  : 
+; 425  : 		return result;
 
 	movsd	xmm0, QWORD PTR result$[rbp]
 
-; 380  : 	}
+; 426  : 	}
 
 	movdqu	XMMWORD PTR [rsp+32], xmm0
 	lea	rcx, QWORD PTR [rbp-48]
@@ -19755,7 +20067,7 @@ l$ = 368
 r$ = 376
 ?performOperation@tree_builder@@QEAANUop@@NN@Z PROC	; tree_builder::performOperation, COMDAT
 
-; 319  : 	{
+; 365  : 	{
 
 $LN15:
 	movsd	QWORD PTR [rsp+32], xmm3
@@ -19769,9 +20081,9 @@ $LN15:
 	lea	rcx, OFFSET FLAT:__3F6EDB1A_tree_builder@h
 	call	__CheckForDebuggerJustMyCode
 
-; 320  : 		double result;
-; 321  : 
-; 322  : 		switch (o.name[0])
+; 366  : 		double result;
+; 367  : 
+; 368  : 		switch (o.name[0])
 
 	mov	rax, QWORD PTR o$[rbp]
 	xor	edx, edx
@@ -19792,70 +20104,70 @@ $LN15:
 	jmp	$LN9@performOpe
 $LN4@performOpe:
 
-; 323  : 		{
-; 324  : 			case '+':
-; 325  : 				result = l + r;
+; 369  : 		{
+; 370  : 			case '+':
+; 371  : 				result = l + r;
 
 	movsd	xmm0, QWORD PTR l$[rbp]
 	addsd	xmm0, QWORD PTR r$[rbp]
 	movsd	QWORD PTR result$[rbp], xmm0
 
-; 326  : 				break;
+; 372  : 				break;
 
 	jmp	$LN2@performOpe
 $LN5@performOpe:
 
-; 327  : 			case '-':
-; 328  : 				result = l - r;
+; 373  : 			case '-':
+; 374  : 				result = l - r;
 
 	movsd	xmm0, QWORD PTR l$[rbp]
 	subsd	xmm0, QWORD PTR r$[rbp]
 	movsd	QWORD PTR result$[rbp], xmm0
 
-; 329  : 				break;
+; 375  : 				break;
 
 	jmp	$LN2@performOpe
 $LN6@performOpe:
 
-; 330  : 			case '/':
-; 331  : 				result = l / r;
+; 376  : 			case '/':
+; 377  : 				result = l / r;
 
 	movsd	xmm0, QWORD PTR l$[rbp]
 	divsd	xmm0, QWORD PTR r$[rbp]
 	movsd	QWORD PTR result$[rbp], xmm0
 
-; 332  : 				break;
+; 378  : 				break;
 
 	jmp	$LN2@performOpe
 $LN7@performOpe:
 
-; 333  : 			case '*':
-; 334  : 				result = l * r;
+; 379  : 			case '*':
+; 380  : 				result = l * r;
 
 	movsd	xmm0, QWORD PTR l$[rbp]
 	mulsd	xmm0, QWORD PTR r$[rbp]
 	movsd	QWORD PTR result$[rbp], xmm0
 
-; 335  : 				break;
+; 381  : 				break;
 
 	jmp	SHORT $LN2@performOpe
 $LN8@performOpe:
 
-; 336  : 			case '^':
-; 337  : 				result = pow(l,r);
+; 382  : 			case '^':
+; 383  : 				result = pow(l,r);
 
 	movsd	xmm1, QWORD PTR r$[rbp]
 	movsd	xmm0, QWORD PTR l$[rbp]
 	call	pow
 	movsd	QWORD PTR result$[rbp], xmm0
 
-; 338  : 				break;
+; 384  : 				break;
 
 	jmp	SHORT $LN2@performOpe
 $LN9@performOpe:
 
-; 339  : 			default:
-; 340  : 				throw new std::exception("undefined operator in performOperation()");
+; 385  : 			default:
+; 386  : 				throw new std::exception("undefined operator in performOperation()");
 
 	mov	ecx, 24
 	call	??2@YAPEAX_K@Z				; operator new
@@ -19877,9 +20189,9 @@ $LN12@performOpe:
 	call	_CxxThrowException
 $LN2@performOpe:
 
-; 341  : 		}
-; 342  : 
-; 343  : 		return result;
+; 387  : 		}
+; 388  : 
+; 389  : 		return result;
 
 	movsd	xmm0, QWORD PTR result$[rbp]
 	movsd	QWORD PTR $T3[rbp], xmm0
@@ -19887,7 +20199,7 @@ $LN2@performOpe:
 	call	??1op@@QEAA@XZ
 	movsd	xmm0, QWORD PTR $T3[rbp]
 
-; 344  : 	}
+; 390  : 	}
 
 	lea	rsp, QWORD PTR [rbp+328]
 	pop	rdi
@@ -19974,7 +20286,7 @@ __$ArrayPad$ = 968
 this$ = 1008
 ?build@tree_builder@@QEAAXXZ PROC			; tree_builder::build, COMDAT
 
-; 302  : 	{
+; 348  : 	{
 
 $LN11:
 	mov	QWORD PTR [rsp+8], rcx
@@ -19993,7 +20305,7 @@ $LN11:
 	lea	rcx, OFFSET FLAT:__3F6EDB1A_tree_builder@h
 	call	__CheckForDebuggerJustMyCode
 
-; 303  : 		std::vector<op> operators = manager->getOperators();
+; 349  : 		std::vector<op> operators = manager->getOperators();
 
 	mov	edx, 32					; 00000020H
 	lea	rcx, QWORD PTR operators$[rbp]
@@ -20004,7 +20316,7 @@ $LN11:
 	call	?getOperators@expression@@QEAA?AV?$vector@Uop@@V?$allocator@Uop@@@std@@@std@@XZ ; expression::getOperators
 	npad	1
 
-; 304  : 		std::vector<std::string> numbers = manager->getNumbers();
+; 350  : 		std::vector<std::string> numbers = manager->getNumbers();
 
 	mov	edx, 32					; 00000020H
 	lea	rcx, QWORD PTR numbers$[rbp]
@@ -20015,15 +20327,15 @@ $LN11:
 	call	?getNumbers@expression@@QEAA?AV?$vector@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@V?$allocator@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@2@@std@@XZ ; expression::getNumbers
 	npad	1
 
-; 305  : 
-; 306  : 		int numberOfOperators = (int)operators.size();
+; 351  : 
+; 352  : 		int numberOfOperators = (int)operators.size();
 
 	lea	rcx, QWORD PTR operators$[rbp]
 	call	?size@?$vector@Uop@@V?$allocator@Uop@@@std@@@std@@QEBA_KXZ ; std::vector<op,std::allocator<op> >::size
 	mov	DWORD PTR numberOfOperators$[rbp], eax
 
-; 307  : 
-; 308  : 		int indexMaximum = findMaxIndex(operators, 0, numberOfOperators, numberOfOperators);
+; 353  : 
+; 354  : 		int indexMaximum = findMaxIndex(operators, 0, numberOfOperators, numberOfOperators);
 
 	lea	rax, QWORD PTR $T7[rbp]
 	mov	QWORD PTR $T8[rbp], rax
@@ -20040,8 +20352,8 @@ $LN11:
 	call	?findMaxIndex@tree_builder@@QEAAHV?$vector@Uop@@V?$allocator@Uop@@@std@@@std@@HHH@Z ; tree_builder::findMaxIndex
 	mov	DWORD PTR indexMaximum$[rbp], eax
 
-; 309  : 
-; 310  : 		op maxNode = operators[indexMaximum];
+; 355  : 
+; 356  : 		op maxNode = operators[indexMaximum];
 
 	movsxd	rax, DWORD PTR indexMaximum$[rbp]
 	mov	rdx, rax
@@ -20052,7 +20364,7 @@ $LN11:
 	call	??0op@@QEAA@AEBU0@@Z
 	npad	1
 
-; 311  : 		node* newNode = new node(maxNode);
+; 357  : 		node* newNode = new node(maxNode);
 
 	mov	ecx, 144				; 00000090H
 	call	??2@YAPEAX_K@Z				; operator new
@@ -20081,7 +20393,7 @@ $LN4@build:
 	mov	rax, QWORD PTR $T9[rbp]
 	mov	QWORD PTR newNode$[rbp], rax
 
-; 312  : 		tree.nodes.push_back(newNode);
+; 358  : 		tree.nodes.push_back(newNode);
 
 	mov	rax, QWORD PTR this$[rbp]
 	add	rax, 8
@@ -20089,15 +20401,15 @@ $LN4@build:
 	mov	rcx, rax
 	call	?push_back@?$vector@PEAVnode@@V?$allocator@PEAVnode@@@std@@@std@@QEAAXAEBQEAVnode@@@Z ; std::vector<node *,std::allocator<node *> >::push_back
 
-; 313  : 
-; 314  : 		addLeft(newNode, indexMaximum);
+; 359  : 
+; 360  : 		addLeft(newNode, indexMaximum);
 
 	mov	r8d, DWORD PTR indexMaximum$[rbp]
 	mov	rdx, QWORD PTR newNode$[rbp]
 	mov	rcx, QWORD PTR this$[rbp]
 	call	?addLeft@tree_builder@@QEAAXPEAVnode@@H@Z ; tree_builder::addLeft
 
-; 315  : 		addRight(newNode, indexMaximum, numberOfOperators);
+; 361  : 		addRight(newNode, indexMaximum, numberOfOperators);
 
 	mov	r9d, DWORD PTR numberOfOperators$[rbp]
 	mov	r8d, DWORD PTR indexMaximum$[rbp]
@@ -20106,7 +20418,7 @@ $LN4@build:
 	call	?addRight@tree_builder@@QEAAXPEAVnode@@HH@Z ; tree_builder::addRight
 	npad	1
 
-; 316  : 	}
+; 362  : 	}
 
 	lea	rcx, QWORD PTR maxNode$[rbp]
 	call	??1op@@QEAA@XZ
@@ -20448,7 +20760,7 @@ index$ = 1344
 parentIndex$ = 1352
 ?addRight@tree_builder@@QEAAXPEAVnode@@HH@Z PROC	; tree_builder::addRight, COMDAT
 
-; 278  : 	{
+; 324  : 	{
 
 $LN21:
 	mov	DWORD PTR [rsp+32], r9d
@@ -20471,7 +20783,7 @@ $LN21:
 	lea	rcx, OFFSET FLAT:__3F6EDB1A_tree_builder@h
 	call	__CheckForDebuggerJustMyCode
 
-; 279  : 		std::vector<op> operators = manager->getOperators();
+; 325  : 		std::vector<op> operators = manager->getOperators();
 
 	mov	edx, 32					; 00000020H
 	lea	rcx, QWORD PTR operators$[rbp]
@@ -20482,8 +20794,8 @@ $LN21:
 	call	?getOperators@expression@@QEAA?AV?$vector@Uop@@V?$allocator@Uop@@@std@@@std@@XZ ; expression::getOperators
 	npad	1
 
-; 280  : 
-; 281  : 		int currentExecNumber = manager->getOperators()[index].executionNumber;
+; 326  : 
+; 327  : 		int currentExecNumber = manager->getOperators()[index].executionNumber;
 
 	movsxd	rax, DWORD PTR index$[rbp]
 	mov	QWORD PTR tv79[rbp], rax
@@ -20501,8 +20813,8 @@ $LN21:
 	lea	rcx, QWORD PTR $T6[rbp]
 	call	??1?$vector@Uop@@V?$allocator@Uop@@@std@@@std@@QEAA@XZ ; std::vector<op,std::allocator<op> >::~vector<op,std::allocator<op> >
 
-; 282  : 
-; 283  : 		int nextMaximumRight = findMaxIndex(manager->getOperators(), index, parentIndex, currentExecNumber);
+; 328  : 
+; 329  : 		int nextMaximumRight = findMaxIndex(manager->getOperators(), index, parentIndex, currentExecNumber);
 
 	lea	rax, QWORD PTR $T7[rbp]
 	mov	QWORD PTR $T8[rbp], rax
@@ -20520,14 +20832,14 @@ $LN21:
 	call	?findMaxIndex@tree_builder@@QEAAHV?$vector@Uop@@V?$allocator@Uop@@@std@@@std@@HHH@Z ; tree_builder::findMaxIndex
 	mov	DWORD PTR nextMaximumRight$[rbp], eax
 
-; 284  : 
-; 285  : 		if (nextMaximumRight != -1)
+; 330  : 
+; 331  : 		if (nextMaximumRight != -1)
 
 	cmp	DWORD PTR nextMaximumRight$[rbp], -1
 	je	$LN2@addRight
 
-; 286  : 		{
-; 287  : 			op nextMaximumNode = (manager->getOperators()[nextMaximumRight]);
+; 332  : 		{
+; 333  : 			op nextMaximumNode = (manager->getOperators()[nextMaximumRight]);
 
 	movsxd	rax, DWORD PTR nextMaximumRight$[rbp]
 	mov	QWORD PTR tv141[rbp], rax
@@ -20549,7 +20861,7 @@ $LN21:
 	lea	rcx, QWORD PTR $T9[rbp]
 	call	??1?$vector@Uop@@V?$allocator@Uop@@@std@@@std@@QEAA@XZ ; std::vector<op,std::allocator<op> >::~vector<op,std::allocator<op> >
 
-; 288  : 			n->right = new node(nextMaximumNode);
+; 334  : 			n->right = new node(nextMaximumNode);
 
 	mov	ecx, 144				; 00000090H
 	call	??2@YAPEAX_K@Z				; operator new
@@ -20579,7 +20891,7 @@ $LN6@addRight:
 	mov	rcx, QWORD PTR $T10[rbp]
 	mov	QWORD PTR [rax+136], rcx
 
-; 289  : 			tree.nodes.push_back(n->right);
+; 335  : 			tree.nodes.push_back(n->right);
 
 	mov	rax, QWORD PTR n$[rbp]
 	add	rax, 136				; 00000088H
@@ -20588,8 +20900,8 @@ $LN6@addRight:
 	mov	rdx, rax
 	call	?push_back@?$vector@PEAVnode@@V?$allocator@PEAVnode@@@std@@@std@@QEAAXAEBQEAVnode@@@Z ; std::vector<node *,std::allocator<node *> >::push_back
 
-; 290  : 
-; 291  : 			addLeft(n->right, nextMaximumRight);
+; 336  : 
+; 337  : 			addLeft(n->right, nextMaximumRight);
 
 	mov	r8d, DWORD PTR nextMaximumRight$[rbp]
 	mov	rax, QWORD PTR n$[rbp]
@@ -20597,7 +20909,7 @@ $LN6@addRight:
 	mov	rcx, QWORD PTR this$[rbp]
 	call	?addLeft@tree_builder@@QEAAXPEAVnode@@H@Z ; tree_builder::addLeft
 
-; 292  : 			addRight(n->right, nextMaximumRight, parentIndex);
+; 338  : 			addRight(n->right, nextMaximumRight, parentIndex);
 
 	mov	r9d, DWORD PTR parentIndex$[rbp]
 	mov	r8d, DWORD PTR nextMaximumRight$[rbp]
@@ -20607,16 +20919,16 @@ $LN6@addRight:
 	call	?addRight@tree_builder@@QEAAXPEAVnode@@HH@Z ; tree_builder::addRight
 	npad	1
 
-; 293  : 		}
+; 339  : 		}
 
 	lea	rcx, QWORD PTR nextMaximumNode$5[rbp]
 	call	??1op@@QEAA@XZ
 	jmp	$LN3@addRight
 $LN2@addRight:
 
-; 294  : 		else
-; 295  : 		{
-; 296  : 			n->right = new node(manager->getNumbers()[index + 1]);
+; 340  : 		else
+; 341  : 		{
+; 342  : 			n->right = new node(manager->getNumbers()[index + 1]);
 
 	mov	ecx, 144				; 00000090H
 	call	??2@YAPEAX_K@Z				; operator new
@@ -20672,7 +20984,7 @@ $LN8@addRight:
 	call	??1?$vector@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@V?$allocator@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@2@@std@@QEAA@XZ ; std::vector<std::basic_string<char,std::char_traits<char>,std::allocator<char> >,std::allocator<std::basic_string<char,std::char_traits<char>,std::allocator<char> > > >::~vector<std::basic_string<char,std::char_traits<char>,std::allocator<char> >,std::allocator<std::basic_string<char,std::char_traits<char>,std::allocator<char> > > >
 $LN20@addRight:
 
-; 297  : 			tree.nodes.push_back(n->right);
+; 343  : 			tree.nodes.push_back(n->right);
 
 	mov	rax, QWORD PTR n$[rbp]
 	add	rax, 136				; 00000088H
@@ -20683,8 +20995,8 @@ $LN20@addRight:
 	npad	1
 $LN3@addRight:
 
-; 298  : 		}
-; 299  : 	}
+; 344  : 		}
+; 345  : 	}
 
 	lea	rcx, QWORD PTR operators$[rbp]
 	call	??1?$vector@Uop@@V?$allocator@Uop@@@std@@@std@@QEAA@XZ ; std::vector<op,std::allocator<op> >::~vector<op,std::allocator<op> >
@@ -21408,7 +21720,7 @@ n$ = 1688
 index$ = 1696
 ?addLeft@tree_builder@@QEAAXPEAVnode@@H@Z PROC		; tree_builder::addLeft, COMDAT
 
-; 247  : 	{
+; 293  : 	{
 
 $LN29:
 	mov	DWORD PTR [rsp+24], r8d
@@ -21430,13 +21742,13 @@ $LN29:
 	lea	rcx, OFFSET FLAT:__3F6EDB1A_tree_builder@h
 	call	__CheckForDebuggerJustMyCode
 
-; 248  : 		if (index == 0)
+; 294  : 		if (index == 0)
 
 	cmp	DWORD PTR index$[rbp], 0
 	jne	$LN2@addLeft
 
-; 249  : 		{
-; 250  : 			n->left = new node(manager->getNumbers()[index]);
+; 295  : 		{
+; 296  : 			n->left = new node(manager->getNumbers()[index]);
 
 	mov	ecx, 144				; 00000090H
 	call	??2@YAPEAX_K@Z				; operator new
@@ -21490,7 +21802,7 @@ $LN8@addLeft:
 	call	??1?$vector@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@V?$allocator@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@2@@std@@QEAA@XZ ; std::vector<std::basic_string<char,std::char_traits<char>,std::allocator<char> >,std::allocator<std::basic_string<char,std::char_traits<char>,std::allocator<char> > > >::~vector<std::basic_string<char,std::char_traits<char>,std::allocator<char> >,std::allocator<std::basic_string<char,std::char_traits<char>,std::allocator<char> > > >
 $LN17@addLeft:
 
-; 251  : 			tree.nodes.push_back(n->left);
+; 297  : 			tree.nodes.push_back(n->left);
 
 	mov	rax, QWORD PTR n$[rbp]
 	add	rax, 128				; 00000080H
@@ -21499,15 +21811,15 @@ $LN17@addLeft:
 	mov	rdx, rax
 	call	?push_back@?$vector@PEAVnode@@V?$allocator@PEAVnode@@@std@@@std@@QEAAXAEBQEAVnode@@@Z ; std::vector<node *,std::allocator<node *> >::push_back
 
-; 252  : 		}
+; 298  : 		}
 
 	jmp	$LN3@addLeft
 $LN2@addLeft:
 
-; 253  : 		else
-; 254  : 		{
-; 255  : 
-; 256  : 			int currentExecNumber = manager->getOperators()[index].executionNumber;
+; 299  : 		else
+; 300  : 		{
+; 301  : 
+; 302  : 			int currentExecNumber = manager->getOperators()[index].executionNumber;
 
 	movsxd	rax, DWORD PTR index$[rbp]
 	mov	QWORD PTR tv144[rbp], rax
@@ -21525,8 +21837,8 @@ $LN2@addLeft:
 	lea	rcx, QWORD PTR $T12[rbp]
 	call	??1?$vector@Uop@@V?$allocator@Uop@@@std@@@std@@QEAA@XZ ; std::vector<op,std::allocator<op> >::~vector<op,std::allocator<op> >
 
-; 257  : 
-; 258  : 			int nextMaximumLeft = findMaxIndex(manager->getOperators(), 0, index, currentExecNumber);
+; 303  : 
+; 304  : 			int nextMaximumLeft = findMaxIndex(manager->getOperators(), 0, index, currentExecNumber);
 
 	lea	rax, QWORD PTR $T13[rbp]
 	mov	QWORD PTR $T14[rbp], rax
@@ -21544,14 +21856,14 @@ $LN2@addLeft:
 	call	?findMaxIndex@tree_builder@@QEAAHV?$vector@Uop@@V?$allocator@Uop@@@std@@@std@@HHH@Z ; tree_builder::findMaxIndex
 	mov	DWORD PTR nextMaximumLeft$5[rbp], eax
 
-; 259  : 
-; 260  : 			if (nextMaximumLeft != -1)
+; 305  : 
+; 306  : 			if (nextMaximumLeft != -1)
 
 	cmp	DWORD PTR nextMaximumLeft$5[rbp], -1
 	je	$LN4@addLeft
 
-; 261  : 			{
-; 262  : 				op nextMaximumNode = (manager->getOperators()[nextMaximumLeft]);
+; 307  : 			{
+; 308  : 				op nextMaximumNode = (manager->getOperators()[nextMaximumLeft]);
 
 	movsxd	rax, DWORD PTR nextMaximumLeft$5[rbp]
 	mov	QWORD PTR tv174[rbp], rax
@@ -21573,7 +21885,7 @@ $LN2@addLeft:
 	lea	rcx, QWORD PTR $T15[rbp]
 	call	??1?$vector@Uop@@V?$allocator@Uop@@@std@@@std@@QEAA@XZ ; std::vector<op,std::allocator<op> >::~vector<op,std::allocator<op> >
 
-; 263  : 				n->left = new node(nextMaximumNode);
+; 309  : 				n->left = new node(nextMaximumNode);
 
 	mov	ecx, 144				; 00000090H
 	call	??2@YAPEAX_K@Z				; operator new
@@ -21603,7 +21915,7 @@ $LN10@addLeft:
 	mov	rcx, QWORD PTR $T16[rbp]
 	mov	QWORD PTR [rax+128], rcx
 
-; 264  : 				tree.nodes.push_back(n->left);
+; 310  : 				tree.nodes.push_back(n->left);
 
 	mov	rax, QWORD PTR n$[rbp]
 	add	rax, 128				; 00000080H
@@ -21612,8 +21924,8 @@ $LN10@addLeft:
 	mov	rdx, rax
 	call	?push_back@?$vector@PEAVnode@@V?$allocator@PEAVnode@@@std@@@std@@QEAAXAEBQEAVnode@@@Z ; std::vector<node *,std::allocator<node *> >::push_back
 
-; 265  : 
-; 266  : 				addLeft(n->left, nextMaximumLeft);
+; 311  : 
+; 312  : 				addLeft(n->left, nextMaximumLeft);
 
 	mov	r8d, DWORD PTR nextMaximumLeft$5[rbp]
 	mov	rax, QWORD PTR n$[rbp]
@@ -21621,7 +21933,7 @@ $LN10@addLeft:
 	mov	rcx, QWORD PTR this$[rbp]
 	call	?addLeft@tree_builder@@QEAAXPEAVnode@@H@Z ; tree_builder::addLeft
 
-; 267  : 				addRight(n->left, nextMaximumLeft, index);
+; 313  : 				addRight(n->left, nextMaximumLeft, index);
 
 	mov	r9d, DWORD PTR index$[rbp]
 	mov	r8d, DWORD PTR nextMaximumLeft$5[rbp]
@@ -21631,16 +21943,16 @@ $LN10@addLeft:
 	call	?addRight@tree_builder@@QEAAXPEAVnode@@HH@Z ; tree_builder::addRight
 	npad	1
 
-; 268  : 			}
+; 314  : 			}
 
 	lea	rcx, QWORD PTR nextMaximumNode$6[rbp]
 	call	??1op@@QEAA@XZ
 	jmp	$LN3@addLeft
 $LN4@addLeft:
 
-; 269  : 			else
-; 270  : 			{
-; 271  : 				n->left = new node(manager->getNumbers()[index]);
+; 315  : 			else
+; 316  : 			{
+; 317  : 				n->left = new node(manager->getNumbers()[index]);
 
 	mov	ecx, 144				; 00000090H
 	call	??2@YAPEAX_K@Z				; operator new
@@ -21694,7 +22006,7 @@ $LN12@addLeft:
 	call	??1?$vector@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@V?$allocator@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@2@@std@@QEAA@XZ ; std::vector<std::basic_string<char,std::char_traits<char>,std::allocator<char> >,std::allocator<std::basic_string<char,std::char_traits<char>,std::allocator<char> > > >::~vector<std::basic_string<char,std::char_traits<char>,std::allocator<char> >,std::allocator<std::basic_string<char,std::char_traits<char>,std::allocator<char> > > >
 $LN28@addLeft:
 
-; 272  : 				tree.nodes.push_back(n->left);
+; 318  : 				tree.nodes.push_back(n->left);
 
 	mov	rax, QWORD PTR n$[rbp]
 	add	rax, 128				; 00000080H
@@ -21704,9 +22016,9 @@ $LN28@addLeft:
 	call	?push_back@?$vector@PEAVnode@@V?$allocator@PEAVnode@@@std@@@std@@QEAAXAEBQEAVnode@@@Z ; std::vector<node *,std::allocator<node *> >::push_back
 $LN3@addLeft:
 
-; 273  : 			}
-; 274  : 		}
-; 275  : 	}
+; 319  : 			}
+; 320  : 		}
+; 321  : 	}
 
 	lea	rcx, QWORD PTR [rbp-48]
 	lea	rdx, OFFSET FLAT:?addLeft@tree_builder@@QEAAXPEAVnode@@H@Z$rtcFrameData
@@ -22636,7 +22948,7 @@ maxIndex$ = 712
 currentExecutionNumber$ = 720
 ?findMaxIndex@tree_builder@@QEAAHV?$vector@Uop@@V?$allocator@Uop@@@std@@@std@@HHH@Z PROC ; tree_builder::findMaxIndex, COMDAT
 
-; 207  : 	{
+; 253  : 	{
 
 $LN14:
 	mov	DWORD PTR [rsp+32], r9d
@@ -22658,20 +22970,20 @@ $LN14:
 	lea	rcx, OFFSET FLAT:__3F6EDB1A_tree_builder@h
 	call	__CheckForDebuggerJustMyCode
 
-; 208  : 		int counter = 0;
+; 254  : 		int counter = 0;
 
 	mov	DWORD PTR counter$[rbp], 0
 
-; 209  : 		int selectedIndex = -1;
+; 255  : 		int selectedIndex = -1;
 
 	mov	DWORD PTR selectedIndex$[rbp], -1
 
-; 210  : 		int maxExecution = -1;
+; 256  : 		int maxExecution = -1;
 
 	mov	DWORD PTR maxExecution$[rbp], -1
 
-; 211  : 
-; 212  : 		for (op oper : operators)
+; 257  : 
+; 258  : 		for (op oper : operators)
 
 	mov	rax, QWORD PTR operators$[rbp]
 	mov	QWORD PTR <range>$L0$4[rbp], rax
@@ -22695,10 +23007,10 @@ $LN4@findMaxInd:
 	call	??0op@@QEAA@AEBU0@@Z
 	npad	1
 
-; 213  : 		{
-; 214  : 			if (counter >= minIndex &&
-; 215  : 				counter < maxIndex &&
-; 216  : 				oper.executionNumber > maxExecution && 
+; 259  : 		{
+; 260  : 			if (counter >= minIndex &&
+; 261  : 				counter < maxIndex &&
+; 262  : 				oper.executionNumber > maxExecution && 
 
 	mov	eax, DWORD PTR minIndex$[rbp]
 	cmp	DWORD PTR counter$[rbp], eax
@@ -22713,14 +23025,14 @@ $LN4@findMaxInd:
 	cmp	DWORD PTR oper$7[rbp+40], eax
 	jge	$LN8@findMaxInd
 
-; 217  : 				oper.executionNumber < currentExecutionNumber)
-; 218  : 			{
-; 219  : 				bool matchFound = false;
+; 263  : 				oper.executionNumber < currentExecutionNumber)
+; 264  : 			{
+; 265  : 				bool matchFound = false;
 
 	mov	BYTE PTR matchFound$8[rbp], 0
 
-; 220  : 
-; 221  : 				for (node * n : tree.nodes)
+; 266  : 
+; 267  : 				for (node * n : tree.nodes)
 
 	mov	rax, QWORD PTR this$[rbp]
 	add	rax, 8
@@ -22744,81 +23056,81 @@ $LN7@findMaxInd:
 	mov	rax, QWORD PTR [rax]
 	mov	QWORD PTR n$12[rbp], rax
 
-; 222  : 				{
-; 223  : 					if (oper.executionNumber == n->getOperatorNumber())
+; 268  : 				{
+; 269  : 					if (oper.executionNumber == n->getOperatorNumber())
 
 	mov	rcx, QWORD PTR n$12[rbp]
 	call	?getOperatorNumber@node@@QEBAHXZ	; node::getOperatorNumber
 	cmp	DWORD PTR oper$7[rbp+40], eax
 	jne	SHORT $LN9@findMaxInd
 
-; 224  : 					{
-; 225  : 						matchFound = true;
+; 270  : 					{
+; 271  : 						matchFound = true;
 
 	mov	BYTE PTR matchFound$8[rbp], 1
 
-; 226  : 						break;
+; 272  : 						break;
 
 	jmp	SHORT $LN6@findMaxInd
 $LN9@findMaxInd:
 
-; 227  : 					}
-; 228  : 				}
+; 273  : 					}
+; 274  : 				}
 
 	jmp	SHORT $LN5@findMaxInd
 $LN6@findMaxInd:
 
-; 229  : 
-; 230  : 				if (matchFound)
+; 275  : 
+; 276  : 				if (matchFound)
 
 	movzx	eax, BYTE PTR matchFound$8[rbp]
 	test	eax, eax
 	je	SHORT $LN10@findMaxInd
 
-; 231  : 				{
-; 232  : 					counter++;
+; 277  : 				{
+; 278  : 					counter++;
 
 	mov	eax, DWORD PTR counter$[rbp]
 	inc	eax
 	mov	DWORD PTR counter$[rbp], eax
 
-; 233  : 					continue;
+; 279  : 					continue;
 
 	lea	rcx, QWORD PTR oper$7[rbp]
 	call	??1op@@QEAA@XZ
 	jmp	$LN2@findMaxInd
 $LN10@findMaxInd:
 
-; 234  : 				}
-; 235  : 
-; 236  : 				maxExecution = oper.executionNumber;
+; 280  : 				}
+; 281  : 
+; 282  : 				maxExecution = oper.executionNumber;
 
 	mov	eax, DWORD PTR oper$7[rbp+40]
 	mov	DWORD PTR maxExecution$[rbp], eax
 
-; 237  : 				selectedIndex = counter;
+; 283  : 				selectedIndex = counter;
 
 	mov	eax, DWORD PTR counter$[rbp]
 	mov	DWORD PTR selectedIndex$[rbp], eax
 $LN8@findMaxInd:
 
-; 238  : 			}
-; 239  : 
-; 240  : 			counter++;
+; 284  : 			}
+; 285  : 
+; 286  : 			counter++;
 
 	mov	eax, DWORD PTR counter$[rbp]
 	inc	eax
 	mov	DWORD PTR counter$[rbp], eax
 
-; 241  : 		}
+; 287  : 		}
 
 	lea	rcx, QWORD PTR oper$7[rbp]
 	call	??1op@@QEAA@XZ
 	jmp	$LN2@findMaxInd
 $LN3@findMaxInd:
 
-; 242  : 
-; 243  : 		return selectedIndex;
+; 288  : 
+; 289  : 		return selectedIndex;
 
 	mov	eax, DWORD PTR selectedIndex$[rbp]
 	mov	DWORD PTR $T13[rbp], eax
@@ -22826,7 +23138,7 @@ $LN3@findMaxInd:
 	call	??1?$vector@Uop@@V?$allocator@Uop@@@std@@@std@@QEAA@XZ ; std::vector<op,std::allocator<op> >::~vector<op,std::allocator<op> >
 	mov	eax, DWORD PTR $T13[rbp]
 
-; 244  : 	}
+; 290  : 	}
 
 	mov	edi, eax
 	lea	rcx, QWORD PTR [rbp-32]
@@ -23023,7 +23335,7 @@ n$ = 1192
 eq$ = 1200
 ?get_string@tree_builder@@QEAAXPEAVnode@@AEAV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z PROC ; tree_builder::get_string, COMDAT
 
-; 190  : 	{
+; 236  : 	{
 
 $LN15:
 	mov	QWORD PTR [rsp+24], r8
@@ -23044,7 +23356,7 @@ $LN15:
 	lea	rcx, OFFSET FLAT:__3F6EDB1A_tree_builder@h
 	call	__CheckForDebuggerJustMyCode
 
-; 191  : 		if (n->IsConstant())
+; 237  : 		if (n->IsConstant())
 
 	mov	rcx, QWORD PTR n$[rbp]
 	call	?IsConstant@node@@QEBA_NXZ		; node::IsConstant
@@ -23052,8 +23364,8 @@ $LN15:
 	test	eax, eax
 	je	SHORT $LN2@get_string
 
-; 192  : 		{
-; 193  : 			eq = n->getConstant();
+; 238  : 		{
+; 239  : 			eq = n->getConstant();
 
 	lea	rdx, QWORD PTR $T7[rbp]
 	mov	rcx, QWORD PTR n$[rbp]
@@ -23065,27 +23377,27 @@ $LN15:
 	lea	rcx, QWORD PTR $T7[rbp]
 	call	??1?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@QEAA@XZ ; std::basic_string<char,std::char_traits<char>,std::allocator<char> >::~basic_string<char,std::char_traits<char>,std::allocator<char> >
 
-; 194  : 		}
+; 240  : 		}
 
 	jmp	$LN3@get_string
 $LN2@get_string:
 
-; 195  : 		else
-; 196  : 		{
-; 197  : 			std::string left_str;
+; 241  : 		else
+; 242  : 		{
+; 243  : 			std::string left_str;
 
 	lea	rcx, QWORD PTR left_str$5[rbp]
 	call	??0?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@QEAA@XZ ; std::basic_string<char,std::char_traits<char>,std::allocator<char> >::basic_string<char,std::char_traits<char>,std::allocator<char> >
 	npad	1
 
-; 198  : 			std::string right_str;
+; 244  : 			std::string right_str;
 
 	lea	rcx, QWORD PTR right_str$6[rbp]
 	call	??0?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@QEAA@XZ ; std::basic_string<char,std::char_traits<char>,std::allocator<char> >::basic_string<char,std::char_traits<char>,std::allocator<char> >
 	npad	1
 
-; 199  : 
-; 200  : 			get_string(n->left, left_str);
+; 245  : 
+; 246  : 			get_string(n->left, left_str);
 
 	lea	r8, QWORD PTR left_str$5[rbp]
 	mov	rax, QWORD PTR n$[rbp]
@@ -23093,7 +23405,7 @@ $LN2@get_string:
 	mov	rcx, QWORD PTR this$[rbp]
 	call	?get_string@tree_builder@@QEAAXPEAVnode@@AEAV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z ; tree_builder::get_string
 
-; 201  : 			get_string(n->right, right_str);
+; 247  : 			get_string(n->right, right_str);
 
 	lea	r8, QWORD PTR right_str$6[rbp]
 	mov	rax, QWORD PTR n$[rbp]
@@ -23101,7 +23413,7 @@ $LN2@get_string:
 	mov	rcx, QWORD PTR this$[rbp]
 	call	?get_string@tree_builder@@QEAAXPEAVnode@@AEAV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z ; tree_builder::get_string
 
-; 202  : 			eq = "(" + left_str + " " + n->getOperator().name + " " + right_str + ")";
+; 248  : 			eq = "(" + left_str + " " + n->getOperator().name + " " + right_str + ")";
 
 	lea	rdx, QWORD PTR $T8[rbp]
 	mov	rcx, QWORD PTR n$[rbp]
@@ -23177,7 +23489,7 @@ $LN2@get_string:
 	call	??1op@@QEAA@XZ
 	npad	1
 
-; 203  : 		}
+; 249  : 		}
 
 	lea	rcx, QWORD PTR right_str$6[rbp]
 	call	??1?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@QEAA@XZ ; std::basic_string<char,std::char_traits<char>,std::allocator<char> >::~basic_string<char,std::char_traits<char>,std::allocator<char> >
@@ -23186,7 +23498,7 @@ $LN2@get_string:
 	call	??1?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@QEAA@XZ ; std::basic_string<char,std::char_traits<char>,std::allocator<char> >::~basic_string<char,std::char_traits<char>,std::allocator<char> >
 $LN3@get_string:
 
-; 204  : 	}
+; 250  : 	}
 
 	lea	rcx, QWORD PTR [rbp-32]
 	lea	rdx, OFFSET FLAT:?get_string@tree_builder@@QEAAXPEAVnode@@AEAV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z$rtcFrameData
@@ -23956,7 +24268,7 @@ this$ = 352
 __$ReturnUdt$ = 360
 ?random_to_string@tree_builder@@QEAA?AV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@XZ PROC ; tree_builder::random_to_string, COMDAT
 
-; 179  : 	{
+; 225  : 	{
 
 $LN6:
 	mov	QWORD PTR [rsp+16], rdx
@@ -23977,7 +24289,7 @@ $LN6:
 	lea	rcx, OFFSET FLAT:__3F6EDB1A_tree_builder@h
 	call	__CheckForDebuggerJustMyCode
 
-; 180  : 		node *n = tree.nodes.front();
+; 226  : 		node *n = tree.nodes.front();
 
 	mov	rax, QWORD PTR this$[rbp]
 	add	rax, 8
@@ -23986,24 +24298,24 @@ $LN6:
 	mov	rax, QWORD PTR [rax]
 	mov	QWORD PTR n$[rbp], rax
 
-; 181  : 
-; 182  : 		std::string eq = "";
+; 227  : 
+; 228  : 		std::string eq = "";
 
 	lea	rdx, OFFSET FLAT:??_C@_00CNPNBAHC@@
 	lea	rcx, QWORD PTR eq$[rbp]
 	call	??0?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@QEAA@QEBD@Z ; std::basic_string<char,std::char_traits<char>,std::allocator<char> >::basic_string<char,std::char_traits<char>,std::allocator<char> >
 	npad	1
 
-; 183  : 
-; 184  : 		get_string(n, eq);
+; 229  : 
+; 230  : 		get_string(n, eq);
 
 	lea	r8, QWORD PTR eq$[rbp]
 	mov	rdx, QWORD PTR n$[rbp]
 	mov	rcx, QWORD PTR this$[rbp]
 	call	?get_string@tree_builder@@QEAAXPEAVnode@@AEAV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z ; tree_builder::get_string
 
-; 185  : 
-; 186  : 		return eq;
+; 231  : 
+; 232  : 		return eq;
 
 	lea	rdx, QWORD PTR eq$[rbp]
 	mov	rcx, QWORD PTR __$ReturnUdt$[rbp]
@@ -24015,7 +24327,7 @@ $LN6:
 	call	??1?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@QEAA@XZ ; std::basic_string<char,std::char_traits<char>,std::allocator<char> >::~basic_string<char,std::char_traits<char>,std::allocator<char> >
 	mov	rax, QWORD PTR __$ReturnUdt$[rbp]
 
-; 187  : 	}
+; 233  : 	}
 
 	mov	rdi, rax
 	lea	rcx, QWORD PTR [rbp-32]
@@ -24092,7 +24404,7 @@ this$ = 448
 __$ReturnUdt$ = 456
 ?to_string@tree_builder@@QEAA?AV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@XZ PROC ; tree_builder::to_string, COMDAT
 
-; 164  : 	{
+; 210  : 	{
 
 $LN7:
 	mov	QWORD PTR [rsp+16], rdx
@@ -24113,7 +24425,7 @@ $LN7:
 	lea	rcx, OFFSET FLAT:__3F6EDB1A_tree_builder@h
 	call	__CheckForDebuggerJustMyCode
 
-; 165  : 		std::vector<op> operators = manager->getOperators();
+; 211  : 		std::vector<op> operators = manager->getOperators();
 
 	mov	edx, 32					; 00000020H
 	lea	rcx, QWORD PTR operators$[rbp]
@@ -24124,16 +24436,16 @@ $LN7:
 	call	?getOperators@expression@@QEAA?AV?$vector@Uop@@V?$allocator@Uop@@@std@@@std@@XZ ; expression::getOperators
 	npad	1
 
-; 166  : 
-; 167  : 		int numberOfOperators = (int)operators.size() - 1;
+; 212  : 
+; 213  : 		int numberOfOperators = (int)operators.size() - 1;
 
 	lea	rcx, QWORD PTR operators$[rbp]
 	call	?size@?$vector@Uop@@V?$allocator@Uop@@@std@@@std@@QEBA_KXZ ; std::vector<op,std::allocator<op> >::size
 	dec	eax
 	mov	DWORD PTR numberOfOperators$[rbp], eax
 
-; 168  : 
-; 169  : 		node *n = tree.getNodeByNumber(numberOfOperators);
+; 214  : 
+; 215  : 		node *n = tree.getNodeByNumber(numberOfOperators);
 
 	mov	rax, QWORD PTR this$[rbp]
 	add	rax, 8
@@ -24142,24 +24454,24 @@ $LN7:
 	call	?getNodeByNumber@binary_tree@@QEAAPEAVnode@@H@Z ; binary_tree::getNodeByNumber
 	mov	QWORD PTR n$[rbp], rax
 
-; 170  : 
-; 171  : 		std::string eq = "";
+; 216  : 
+; 217  : 		std::string eq = "";
 
 	lea	rdx, OFFSET FLAT:??_C@_00CNPNBAHC@@
 	lea	rcx, QWORD PTR eq$[rbp]
 	call	??0?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@QEAA@QEBD@Z ; std::basic_string<char,std::char_traits<char>,std::allocator<char> >::basic_string<char,std::char_traits<char>,std::allocator<char> >
 	npad	1
 
-; 172  : 
-; 173  : 		get_string(n, eq);
+; 218  : 
+; 219  : 		get_string(n, eq);
 
 	lea	r8, QWORD PTR eq$[rbp]
 	mov	rdx, QWORD PTR n$[rbp]
 	mov	rcx, QWORD PTR this$[rbp]
 	call	?get_string@tree_builder@@QEAAXPEAVnode@@AEAV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z ; tree_builder::get_string
 
-; 174  : 
-; 175  : 		return eq;
+; 220  : 
+; 221  : 		return eq;
 
 	lea	rdx, QWORD PTR eq$[rbp]
 	mov	rcx, QWORD PTR __$ReturnUdt$[rbp]
@@ -24174,7 +24486,7 @@ $LN7:
 	call	??1?$vector@Uop@@V?$allocator@Uop@@@std@@@std@@QEAA@XZ ; std::vector<op,std::allocator<op> >::~vector<op,std::allocator<op> >
 	mov	rax, QWORD PTR __$ReturnUdt$[rbp]
 
-; 176  : 	}
+; 222  : 	}
 
 	mov	rdi, rax
 	lea	rcx, QWORD PTR [rbp-32]
@@ -24303,7 +24615,7 @@ __$ArrayPad$ = 312
 this$ = 352
 ?print_tree@tree_builder@@QEAAXXZ PROC			; tree_builder::print_tree, COMDAT
 
-; 153  : 	{
+; 199  : 	{
 
 $LN4:
 	mov	QWORD PTR [rsp+8], rcx
@@ -24322,7 +24634,7 @@ $LN4:
 	lea	rcx, OFFSET FLAT:__3F6EDB1A_tree_builder@h
 	call	__CheckForDebuggerJustMyCode
 
-; 154  : 		std::vector<op> operators = manager->getOperators();
+; 200  : 		std::vector<op> operators = manager->getOperators();
 
 	mov	edx, 32					; 00000020H
 	lea	rcx, QWORD PTR operators$[rbp]
@@ -24333,16 +24645,16 @@ $LN4:
 	call	?getOperators@expression@@QEAA?AV?$vector@Uop@@V?$allocator@Uop@@@std@@@std@@XZ ; expression::getOperators
 	npad	1
 
-; 155  : 
-; 156  : 		int numberOfOperators = (int)operators.size() - 1;
+; 201  : 
+; 202  : 		int numberOfOperators = (int)operators.size() - 1;
 
 	lea	rcx, QWORD PTR operators$[rbp]
 	call	?size@?$vector@Uop@@V?$allocator@Uop@@@std@@@std@@QEBA_KXZ ; std::vector<op,std::allocator<op> >::size
 	dec	eax
 	mov	DWORD PTR numberOfOperators$[rbp], eax
 
-; 157  : 
-; 158  : 		node *n = tree.getNodeByNumber(numberOfOperators);
+; 203  : 
+; 204  : 		node *n = tree.getNodeByNumber(numberOfOperators);
 
 	mov	rax, QWORD PTR this$[rbp]
 	add	rax, 8
@@ -24351,15 +24663,15 @@ $LN4:
 	call	?getNodeByNumber@binary_tree@@QEAAPEAVnode@@H@Z ; binary_tree::getNodeByNumber
 	mov	QWORD PTR n$[rbp], rax
 
-; 159  : 
-; 160  : 		print_node(n);
+; 205  : 
+; 206  : 		print_node(n);
 
 	mov	rdx, QWORD PTR n$[rbp]
 	mov	rcx, QWORD PTR this$[rbp]
 	call	?print_node@tree_builder@@QEAAXPEAVnode@@@Z ; tree_builder::print_node
 	npad	1
 
-; 161  : 	}
+; 207  : 	}
 
 	lea	rcx, QWORD PTR operators$[rbp]
 	call	??1?$vector@Uop@@V?$allocator@Uop@@@std@@@std@@QEAA@XZ ; std::vector<op,std::allocator<op> >::~vector<op,std::allocator<op> >
@@ -24439,7 +24751,7 @@ this$ = 528
 n$ = 536
 ?print_node@tree_builder@@QEAAXPEAVnode@@@Z PROC	; tree_builder::print_node, COMDAT
 
-; 133  : 	{
+; 179  : 	{
 
 $LN13:
 	mov	QWORD PTR [rsp+16], rdx
@@ -24452,20 +24764,20 @@ $LN13:
 	lea	rcx, OFFSET FLAT:__3F6EDB1A_tree_builder@h
 	call	__CheckForDebuggerJustMyCode
 
-; 134  : 		if (!n)
+; 180  : 		if (!n)
 
 	cmp	QWORD PTR n$[rbp], 0
 	jne	SHORT $LN2@print_node
 
-; 135  : 		{
-; 136  : 			return;
+; 181  : 		{
+; 182  : 			return;
 
 	jmp	$LN1@print_node
 $LN2@print_node:
 
-; 137  : 		}
-; 138  : 
-; 139  : 		if (n->isOperator() && n->getOperator().executionNumber != 99999)
+; 183  : 		}
+; 184  : 
+; 185  : 		if (n->isOperator() && n->getOperator().executionNumber != 99999)
 
 	mov	rcx, QWORD PTR n$[rbp]
 	call	?isOperator@node@@QEBA_NXZ		; node::isOperator
@@ -24501,8 +24813,8 @@ $LN10@print_node:
 	test	eax, eax
 	je	SHORT $LN3@print_node
 
-; 140  : 		{
-; 141  : 			std::cout << n->getOperator().name << std::endl;
+; 186  : 		{
+; 187  : 			std::cout << n->getOperator().name << std::endl;
 
 	lea	rdx, QWORD PTR $T3[rbp]
 	mov	rcx, QWORD PTR n$[rbp]
@@ -24521,14 +24833,14 @@ $LN10@print_node:
 	lea	rcx, QWORD PTR $T3[rbp]
 	call	??1op@@QEAA@XZ
 
-; 142  : 		}
+; 188  : 		}
 
 	jmp	SHORT $LN4@print_node
 $LN3@print_node:
 
-; 143  : 		else
-; 144  : 		{
-; 145  : 			std::cout << n->getConstant() << std::endl;
+; 189  : 		else
+; 190  : 		{
+; 191  : 			std::cout << n->getConstant() << std::endl;
 
 	lea	rdx, QWORD PTR $T4[rbp]
 	mov	rcx, QWORD PTR n$[rbp]
@@ -24547,16 +24859,16 @@ $LN3@print_node:
 	call	??1?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@QEAA@XZ ; std::basic_string<char,std::char_traits<char>,std::allocator<char> >::~basic_string<char,std::char_traits<char>,std::allocator<char> >
 $LN4@print_node:
 
-; 146  : 		}
-; 147  : 
-; 148  : 		print_node(n->left);
+; 192  : 		}
+; 193  : 
+; 194  : 		print_node(n->left);
 
 	mov	rax, QWORD PTR n$[rbp]
 	mov	rdx, QWORD PTR [rax+128]
 	mov	rcx, QWORD PTR this$[rbp]
 	call	?print_node@tree_builder@@QEAAXPEAVnode@@@Z ; tree_builder::print_node
 
-; 149  : 		print_node(n->right);
+; 195  : 		print_node(n->right);
 
 	mov	rax, QWORD PTR n$[rbp]
 	mov	rdx, QWORD PTR [rax+136]
@@ -24564,7 +24876,7 @@ $LN4@print_node:
 	call	?print_node@tree_builder@@QEAAXPEAVnode@@@Z ; tree_builder::print_node
 $LN1@print_node:
 
-; 150  : 	}
+; 196  : 	}
 
 	lea	rsp, QWORD PTR [rbp+504]
 	pop	rdi
@@ -24777,7 +25089,7 @@ n$ = 2776
 supportedVariables$ = 2784
 ?createLeftRightNodes@tree_builder@@QEAAXHV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@PEAVnode@@0@Z PROC ; tree_builder::createLeftRightNodes, COMDAT
 
-; 75   : 	{
+; 121  : 	{
 
 $LN49:
 	mov	QWORD PTR [rsp+32], r9
@@ -24799,13 +25111,13 @@ $LN49:
 	lea	rcx, OFFSET FLAT:__3F6EDB1A_tree_builder@h
 	call	__CheckForDebuggerJustMyCode
 
-; 76   : 		if (numberOfLevels == 0)
+; 122  : 		if (numberOfLevels == 0)
 
 	cmp	DWORD PTR numberOfLevels$[rbp], 0
 	jne	$LN2@createLeft
 
-; 77   : 		{
-; 78   : 			bool useVar = getrand(2) == 0;
+; 123  : 		{
+; 124  : 			bool useVar = getrand(2) == 0;
 
 	mov	edx, 2
 	mov	rcx, QWORD PTR this$[rbp]
@@ -24820,8 +25132,8 @@ $LN10@createLeft:
 	movzx	eax, BYTE PTR tv71[rbp]
 	mov	BYTE PTR useVar$5[rbp], al
 
-; 79   : 
-; 80   : 			if (useVar && supportedVariables.size() > 0)
+; 125  : 
+; 126  : 			if (useVar && supportedVariables.size() > 0)
 
 	movzx	eax, BYTE PTR useVar$5[rbp]
 	test	eax, eax
@@ -24831,8 +25143,8 @@ $LN10@createLeft:
 	test	rax, rax
 	jbe	$LN4@createLeft
 
-; 81   : 			{
-; 82   : 				int idx = getrand(supportedVariables.size());
+; 127  : 			{
+; 128  : 				int idx = getrand(supportedVariables.size());
 
 	mov	rcx, QWORD PTR supportedVariables$[rbp]
 	call	?size@?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@QEBA_KXZ ; std::basic_string<char,std::char_traits<char>,std::allocator<char> >::size
@@ -24841,7 +25153,7 @@ $LN10@createLeft:
 	call	?getrand@tree_builder@@QEAAH_K@Z	; tree_builder::getrand
 	mov	DWORD PTR idx$6[rbp], eax
 
-; 83   : 				n->left = new node(supportedVariables.substr(idx,1));
+; 129  : 				n->left = new node(supportedVariables.substr(idx,1));
 
 	mov	ecx, 144				; 00000090H
 	call	??2@YAPEAX_K@Z				; operator new
@@ -24874,7 +25186,7 @@ $LN12@createLeft:
 	mov	rcx, QWORD PTR $T13[rbp]
 	mov	QWORD PTR [rax+128], rcx
 
-; 84   : 				tree.nodes.push_back(n->left);
+; 130  : 				tree.nodes.push_back(n->left);
 
 	mov	rax, QWORD PTR n$[rbp]
 	add	rax, 128				; 00000080H
@@ -24883,15 +25195,15 @@ $LN12@createLeft:
 	mov	rdx, rax
 	call	?push_back@?$vector@PEAVnode@@V?$allocator@PEAVnode@@@std@@@std@@QEAAXAEBQEAVnode@@@Z ; std::vector<node *,std::allocator<node *> >::push_back
 
-; 85   : 
-; 86   : 			}
+; 131  : 
+; 132  : 			}
 
 	jmp	$LN5@createLeft
 $LN4@createLeft:
 
-; 87   : 			else
-; 88   : 			{
-; 89   : 				double l = randomDouble(-100.0, 100.0);
+; 133  : 			else
+; 134  : 			{
+; 135  : 				double l = randomDouble(-100.0, 100.0);
 
 	movsd	xmm2, QWORD PTR __real@4059000000000000
 	movsd	xmm1, QWORD PTR __real@c059000000000000
@@ -24899,7 +25211,7 @@ $LN4@createLeft:
 	call	?randomDouble@tree_builder@@QEAANNN@Z	; tree_builder::randomDouble
 	movsd	QWORD PTR l$7[rbp], xmm0
 
-; 90   : 				n->left = new node(std::to_string(l));
+; 136  : 				n->left = new node(std::to_string(l));
 
 	mov	ecx, 144				; 00000090H
 	call	??2@YAPEAX_K@Z				; operator new
@@ -24929,7 +25241,7 @@ $LN14@createLeft:
 	mov	rcx, QWORD PTR $T17[rbp]
 	mov	QWORD PTR [rax+128], rcx
 
-; 91   : 				tree.nodes.push_back(n->left);
+; 137  : 				tree.nodes.push_back(n->left);
 
 	mov	rax, QWORD PTR n$[rbp]
 	add	rax, 128				; 00000080H
@@ -24939,9 +25251,9 @@ $LN14@createLeft:
 	call	?push_back@?$vector@PEAVnode@@V?$allocator@PEAVnode@@@std@@@std@@QEAAXAEBQEAVnode@@@Z ; std::vector<node *,std::allocator<node *> >::push_back
 $LN5@createLeft:
 
-; 92   : 			}
-; 93   : 
-; 94   : 			useVar = useVar ? false : getrand(2) == 0;
+; 138  : 			}
+; 139  : 
+; 140  : 			useVar = useVar ? false : getrand(2) == 0;
 
 	movzx	eax, BYTE PTR useVar$5[rbp]
 	test	eax, eax
@@ -24965,8 +25277,8 @@ $LN18@createLeft:
 	movzx	eax, BYTE PTR tv187[rbp]
 	mov	BYTE PTR useVar$5[rbp], al
 
-; 95   : 
-; 96   : 			if (useVar && supportedVariables.size() > 0)
+; 141  : 
+; 142  : 			if (useVar && supportedVariables.size() > 0)
 
 	movzx	eax, BYTE PTR useVar$5[rbp]
 	test	eax, eax
@@ -24976,8 +25288,8 @@ $LN18@createLeft:
 	test	rax, rax
 	jbe	$LN6@createLeft
 
-; 97   : 			{
-; 98   : 				int idx = getrand(supportedVariables.size());
+; 143  : 			{
+; 144  : 				int idx = getrand(supportedVariables.size());
 
 	mov	rcx, QWORD PTR supportedVariables$[rbp]
 	call	?size@?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@QEBA_KXZ ; std::basic_string<char,std::char_traits<char>,std::allocator<char> >::size
@@ -24986,7 +25298,7 @@ $LN18@createLeft:
 	call	?getrand@tree_builder@@QEAAH_K@Z	; tree_builder::getrand
 	mov	DWORD PTR idx$8[rbp], eax
 
-; 99   : 				n->right = new node(supportedVariables.substr(idx, 1));
+; 145  : 				n->right = new node(supportedVariables.substr(idx, 1));
 
 	mov	ecx, 144				; 00000090H
 	call	??2@YAPEAX_K@Z				; operator new
@@ -25019,7 +25331,7 @@ $LN20@createLeft:
 	mov	rcx, QWORD PTR $T21[rbp]
 	mov	QWORD PTR [rax+136], rcx
 
-; 100  : 				tree.nodes.push_back(n->right);
+; 146  : 				tree.nodes.push_back(n->right);
 
 	mov	rax, QWORD PTR n$[rbp]
 	add	rax, 136				; 00000088H
@@ -25028,15 +25340,15 @@ $LN20@createLeft:
 	mov	rdx, rax
 	call	?push_back@?$vector@PEAVnode@@V?$allocator@PEAVnode@@@std@@@std@@QEAAXAEBQEAVnode@@@Z ; std::vector<node *,std::allocator<node *> >::push_back
 
-; 101  : 
-; 102  : 			}
+; 147  : 
+; 148  : 			}
 
 	jmp	$LN7@createLeft
 $LN6@createLeft:
 
-; 103  : 			else
-; 104  : 			{
-; 105  : 				double r = randomDouble(-100.0, 100.0);
+; 149  : 			else
+; 150  : 			{
+; 151  : 				double r = randomDouble(-100.0, 100.0);
 
 	movsd	xmm2, QWORD PTR __real@4059000000000000
 	movsd	xmm1, QWORD PTR __real@c059000000000000
@@ -25044,7 +25356,7 @@ $LN6@createLeft:
 	call	?randomDouble@tree_builder@@QEAANNN@Z	; tree_builder::randomDouble
 	movsd	QWORD PTR r$9[rbp], xmm0
 
-; 106  : 				n->right = new node(std::to_string(r));
+; 152  : 				n->right = new node(std::to_string(r));
 
 	mov	ecx, 144				; 00000090H
 	call	??2@YAPEAX_K@Z				; operator new
@@ -25074,7 +25386,7 @@ $LN22@createLeft:
 	mov	rcx, QWORD PTR $T25[rbp]
 	mov	QWORD PTR [rax+136], rcx
 
-; 107  : 				tree.nodes.push_back(n->right);
+; 153  : 				tree.nodes.push_back(n->right);
 
 	mov	rax, QWORD PTR n$[rbp]
 	add	rax, 136				; 00000088H
@@ -25084,18 +25396,18 @@ $LN22@createLeft:
 	call	?push_back@?$vector@PEAVnode@@V?$allocator@PEAVnode@@@std@@@std@@QEAAXAEBQEAVnode@@@Z ; std::vector<node *,std::allocator<node *> >::push_back
 $LN7@createLeft:
 
-; 108  : 			}
-; 109  : 
-; 110  : 			
-; 111  : 			
-; 112  : 		}
+; 154  : 			}
+; 155  : 
+; 156  : 			
+; 157  : 			
+; 158  : 		}
 
 	jmp	$LN3@createLeft
 $LN2@createLeft:
 
-; 113  : 		else
-; 114  : 		{
-; 115  : 			int idx = rand() % operators.length();
+; 159  : 		else
+; 160  : 		{
+; 161  : 			int idx = rand() % operators.length();
 
 	call	QWORD PTR __imp_rand
 	cdqe
@@ -25111,8 +25423,8 @@ $LN2@createLeft:
 	mov	rax, rdx
 	mov	DWORD PTR idx$10[rbp], eax
 
-; 116  : 
-; 117  : 			op operL(std::string(1, operators.at(idx)));
+; 162  : 
+; 163  : 			op operL(std::string(1, operators.at(idx)));
 
 	lea	rax, QWORD PTR $T29[rbp]
 	mov	QWORD PTR $T30[rbp], rax
@@ -25130,7 +25442,7 @@ $LN2@createLeft:
 	call	??0op@@QEAA@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z ; op::op
 	npad	1
 
-; 118  : 			n->left = new node(operL);
+; 164  : 			n->left = new node(operL);
 
 	mov	ecx, 144				; 00000090H
 	call	??2@YAPEAX_K@Z				; operator new
@@ -25160,7 +25472,7 @@ $LN24@createLeft:
 	mov	rcx, QWORD PTR $T31[rbp]
 	mov	QWORD PTR [rax+128], rcx
 
-; 119  : 			tree.nodes.push_back(n->left);
+; 165  : 			tree.nodes.push_back(n->left);
 
 	mov	rax, QWORD PTR n$[rbp]
 	add	rax, 128				; 00000080H
@@ -25169,8 +25481,8 @@ $LN24@createLeft:
 	mov	rdx, rax
 	call	?push_back@?$vector@PEAVnode@@V?$allocator@PEAVnode@@@std@@@std@@QEAAXAEBQEAVnode@@@Z ; std::vector<node *,std::allocator<node *> >::push_back
 
-; 120  : 
-; 121  : 			idx = rand() % operators.length();
+; 166  : 
+; 167  : 			idx = rand() % operators.length();
 
 	call	QWORD PTR __imp_rand
 	cdqe
@@ -25186,8 +25498,8 @@ $LN24@createLeft:
 	mov	rax, rdx
 	mov	DWORD PTR idx$10[rbp], eax
 
-; 122  : 
-; 123  : 			op operR(std::string(1, operators.at(idx)));
+; 168  : 
+; 169  : 			op operR(std::string(1, operators.at(idx)));
 
 	lea	rax, QWORD PTR $T35[rbp]
 	mov	QWORD PTR $T36[rbp], rax
@@ -25205,7 +25517,7 @@ $LN24@createLeft:
 	call	??0op@@QEAA@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z ; op::op
 	npad	1
 
-; 124  : 			n->right = new node(operR);
+; 170  : 			n->right = new node(operR);
 
 	mov	ecx, 144				; 00000090H
 	call	??2@YAPEAX_K@Z				; operator new
@@ -25235,7 +25547,7 @@ $LN26@createLeft:
 	mov	rcx, QWORD PTR $T37[rbp]
 	mov	QWORD PTR [rax+136], rcx
 
-; 125  : 			tree.nodes.push_back(n->right);
+; 171  : 			tree.nodes.push_back(n->right);
 
 	mov	rax, QWORD PTR n$[rbp]
 	add	rax, 136				; 00000088H
@@ -25244,8 +25556,8 @@ $LN26@createLeft:
 	mov	rdx, rax
 	call	?push_back@?$vector@PEAVnode@@V?$allocator@PEAVnode@@@std@@@std@@QEAAXAEBQEAVnode@@@Z ; std::vector<node *,std::allocator<node *> >::push_back
 
-; 126  : 
-; 127  : 			createLeftRightNodes(numberOfLevels - 1, operators, n->left, supportedVariables);
+; 172  : 
+; 173  : 			createLeftRightNodes(numberOfLevels - 1, operators, n->left, supportedVariables);
 
 	lea	rax, QWORD PTR $T41[rbp]
 	mov	QWORD PTR $T42[rbp], rax
@@ -25272,7 +25584,7 @@ $LN26@createLeft:
 	mov	rcx, QWORD PTR this$[rbp]
 	call	?createLeftRightNodes@tree_builder@@QEAAXHV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@PEAVnode@@0@Z ; tree_builder::createLeftRightNodes
 
-; 128  : 			createLeftRightNodes(numberOfLevels - 1, operators, n->right, supportedVariables);
+; 174  : 			createLeftRightNodes(numberOfLevels - 1, operators, n->right, supportedVariables);
 
 	lea	rax, QWORD PTR $T45[rbp]
 	mov	QWORD PTR $T46[rbp], rax
@@ -25300,7 +25612,7 @@ $LN26@createLeft:
 	call	?createLeftRightNodes@tree_builder@@QEAAXHV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@PEAVnode@@0@Z ; tree_builder::createLeftRightNodes
 	npad	1
 
-; 129  : 		}
+; 175  : 		}
 
 	lea	rcx, QWORD PTR operR$12[rbp]
 	call	??1op@@QEAA@XZ
@@ -25310,7 +25622,7 @@ $LN26@createLeft:
 	npad	1
 $LN3@createLeft:
 
-; 130  : 	}
+; 176  : 	}
 
 	mov	rcx, QWORD PTR operators$[rbp]
 	call	??1?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@QEAA@XZ ; std::basic_string<char,std::char_traits<char>,std::allocator<char> >::~basic_string<char,std::char_traits<char>,std::allocator<char> >
@@ -27617,7 +27929,7 @@ this$ = 224
 max$ = 232
 ?getrand@tree_builder@@QEAAH_K@Z PROC			; tree_builder::getrand, COMDAT
 
-; 69   : 	{
+; 115  : 	{
 
 $LN3:
 	mov	QWORD PTR [rsp+16], rdx
@@ -27629,7 +27941,7 @@ $LN3:
 	lea	rcx, OFFSET FLAT:__3F6EDB1A_tree_builder@h
 	call	__CheckForDebuggerJustMyCode
 
-; 70   : 		return rand() % max;
+; 116  : 		return rand() % max;
 
 	call	QWORD PTR __imp_rand
 	cdqe
@@ -27637,8 +27949,8 @@ $LN3:
 	div	QWORD PTR max$[rbp]
 	mov	rax, rdx
 
-; 71   : 
-; 72   : 	}
+; 117  : 
+; 118  : 	}
 
 	lea	rsp, QWORD PTR [rbp+200]
 	pop	rdi
@@ -27656,7 +27968,7 @@ fMin$ = 264
 fMax$ = 272
 ?randomDouble@tree_builder@@QEAANNN@Z PROC		; tree_builder::randomDouble, COMDAT
 
-; 63   : 	{
+; 109  : 	{
 
 $LN3:
 	movsd	QWORD PTR [rsp+24], xmm2
@@ -27669,14 +27981,14 @@ $LN3:
 	lea	rcx, OFFSET FLAT:__3F6EDB1A_tree_builder@h
 	call	__CheckForDebuggerJustMyCode
 
-; 64   : 		double f = (double)rand() / RAND_MAX;
+; 110  : 		double f = (double)rand() / RAND_MAX;
 
 	call	QWORD PTR __imp_rand
 	cvtsi2sd xmm0, eax
 	divsd	xmm0, QWORD PTR __real@40dfffc000000000
 	movsd	QWORD PTR f$[rbp], xmm0
 
-; 65   : 		return fMin + f * (fMax - fMin);
+; 111  : 		return fMin + f * (fMax - fMin);
 
 	movsd	xmm0, QWORD PTR fMax$[rbp]
 	subsd	xmm0, QWORD PTR fMin$[rbp]
@@ -27687,7 +27999,7 @@ $LN3:
 	addsd	xmm1, xmm0
 	movaps	xmm0, xmm1
 
-; 66   : 	}
+; 112  : 	}
 
 	lea	rsp, QWORD PTR [rbp+232]
 	pop	rdi
@@ -27727,7 +28039,7 @@ mathOperators$ = 1072
 supportedVariables$ = 1080
 ?generate_random_tree@tree_builder@@QEAAXHV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@0@Z PROC ; tree_builder::generate_random_tree, COMDAT
 
-; 50   : 	{
+; 96   : 	{
 
 $LN13:
 	mov	QWORD PTR [rsp+32], r9
@@ -27749,8 +28061,8 @@ $LN13:
 	lea	rcx, OFFSET FLAT:__3F6EDB1A_tree_builder@h
 	call	__CheckForDebuggerJustMyCode
 
-; 51   : 		//select operator random from mathOperators
-; 52   : 		int idx = rand() % mathOperators.length();
+; 97   : 		//select operator random from mathOperators
+; 98   : 		int idx = rand() % mathOperators.length();
 
 	call	QWORD PTR __imp_rand
 	cdqe
@@ -27766,8 +28078,8 @@ $LN13:
 	mov	rax, rdx
 	mov	DWORD PTR idx$[rbp], eax
 
-; 53   : 
-; 54   : 		op oper(std::string(1, mathOperators.at(idx)));
+; 99   : 
+; 100  : 		op oper(std::string(1, mathOperators.at(idx)));
 
 	lea	rax, QWORD PTR $T5[rbp]
 	mov	QWORD PTR $T6[rbp], rax
@@ -27785,7 +28097,7 @@ $LN13:
 	call	??0op@@QEAA@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z ; op::op
 	npad	1
 
-; 55   : 		node *n = new node(oper);
+; 101  : 		node *n = new node(oper);
 
 	mov	ecx, 144				; 00000090H
 	call	??2@YAPEAX_K@Z				; operator new
@@ -27814,8 +28126,8 @@ $LN4@generate_r:
 	mov	rax, QWORD PTR $T7[rbp]
 	mov	QWORD PTR n$[rbp], rax
 
-; 56   : 
-; 57   : 		tree.nodes.push_back(n);
+; 102  : 
+; 103  : 		tree.nodes.push_back(n);
 
 	mov	rax, QWORD PTR this$[rbp]
 	add	rax, 8
@@ -27823,8 +28135,8 @@ $LN4@generate_r:
 	mov	rcx, rax
 	call	?push_back@?$vector@PEAVnode@@V?$allocator@PEAVnode@@@std@@@std@@QEAAXAEBQEAVnode@@@Z ; std::vector<node *,std::allocator<node *> >::push_back
 
-; 58   : 
-; 59   : 		createLeftRightNodes(numberOfLevels - 1, mathOperators, n, supportedVariables);
+; 104  : 
+; 105  : 		createLeftRightNodes(numberOfLevels - 1, mathOperators, n, supportedVariables);
 
 	lea	rax, QWORD PTR $T11[rbp]
 	mov	QWORD PTR $T12[rbp], rax
@@ -27851,7 +28163,7 @@ $LN4@generate_r:
 	call	?createLeftRightNodes@tree_builder@@QEAAXHV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@PEAVnode@@0@Z ; tree_builder::createLeftRightNodes
 	npad	1
 
-; 60   : 	}
+; 106  : 	}
 
 	lea	rcx, QWORD PTR oper$[rbp]
 	call	??1op@@QEAA@XZ
@@ -28312,13 +28624,46 @@ supportedVariables$ = 1080
 text$x	ENDS
 ; Function compile flags: /Odtp /RTCsu /ZI
 ; File C:\Users\shtuk\Desktop\Files\EquationStringParser\EquationStringParser\tree_builder.h
+;	COMDAT ?mutate@tree_builder@@QEAAXXZ
+_TEXT	SEGMENT
+this$ = 224
+?mutate@tree_builder@@QEAAXXZ PROC			; tree_builder::mutate, COMDAT
+
+; 91   : 	{
+
+$LN3:
+	mov	QWORD PTR [rsp+8], rcx
+	push	rbp
+	push	rdi
+	sub	rsp, 232				; 000000e8H
+	lea	rbp, QWORD PTR [rsp+32]
+	lea	rcx, OFFSET FLAT:__3F6EDB1A_tree_builder@h
+	call	__CheckForDebuggerJustMyCode
+
+; 92   : 		tree.mutate();
+
+	mov	rax, QWORD PTR this$[rbp]
+	add	rax, 8
+	mov	rcx, rax
+	call	?mutate@binary_tree@@QEAAXXZ		; binary_tree::mutate
+
+; 93   : 	}
+
+	lea	rsp, QWORD PTR [rbp+200]
+	pop	rdi
+	pop	rbp
+	ret	0
+?mutate@tree_builder@@QEAAXXZ ENDP			; tree_builder::mutate
+_TEXT	ENDS
+; Function compile flags: /Odtp /RTCsu /ZI
+; File C:\Users\shtuk\Desktop\Files\EquationStringParser\EquationStringParser\tree_builder.h
 ;	COMDAT ??0tree_builder@@QEAA@PEAVexpression@@@Z
 _TEXT	SEGMENT
 this$ = 224
 table$ = 232
 ??0tree_builder@@QEAA@PEAVexpression@@@Z PROC		; tree_builder::tree_builder, COMDAT
 
-; 45   : 	{
+; 86   : 	{
 
 $LN4:
 	mov	QWORD PTR [rsp+16], rdx
@@ -28330,27 +28675,27 @@ $LN4:
 	lea	rcx, OFFSET FLAT:__3F6EDB1A_tree_builder@h
 	call	__CheckForDebuggerJustMyCode
 
-; 44   : 	tree_builder(expression *table = nullptr) : manager(table)
+; 85   : 	tree_builder(expression *table = nullptr) : manager(table)
 
 	mov	rax, QWORD PTR this$[rbp]
 	mov	rcx, QWORD PTR table$[rbp]
 	mov	QWORD PTR [rax], rcx
 
-; 45   : 	{
+; 86   : 	{
 
 	mov	rax, QWORD PTR this$[rbp]
 	add	rax, 8
 	mov	rcx, rax
-	call	??0binary_tree@@QEAA@XZ
+	call	??0binary_tree@@QEAA@XZ			; binary_tree::binary_tree
 
-; 46   : 		srand((unsigned)time(0));
+; 87   : 		srand((unsigned)time(NULL));
 
 	xor	ecx, ecx
 	call	time
 	mov	ecx, eax
 	call	QWORD PTR __imp_srand
 
-; 47   : 	}
+; 88   : 	}
 
 	mov	rax, QWORD PTR this$[rbp]
 	lea	rsp, QWORD PTR [rbp+200]
@@ -28358,27 +28703,6 @@ $LN4:
 	pop	rbp
 	ret	0
 ??0tree_builder@@QEAA@PEAVexpression@@@Z ENDP		; tree_builder::tree_builder
-_TEXT	ENDS
-; Function compile flags: /Odtp /RTCsu /ZI
-;	COMDAT ??0binary_tree@@QEAA@XZ
-_TEXT	SEGMENT
-this$ = 224
-??0binary_tree@@QEAA@XZ PROC				; binary_tree::binary_tree, COMDAT
-$LN3:
-	mov	QWORD PTR [rsp+8], rcx
-	push	rbp
-	push	rdi
-	sub	rsp, 232				; 000000e8H
-	lea	rbp, QWORD PTR [rsp+32]
-	mov	rax, QWORD PTR this$[rbp]
-	mov	rcx, rax
-	call	??0?$vector@PEAVnode@@V?$allocator@PEAVnode@@@std@@@std@@QEAA@XZ ; std::vector<node *,std::allocator<node *> >::vector<node *,std::allocator<node *> >
-	mov	rax, QWORD PTR this$[rbp]
-	lea	rsp, QWORD PTR [rbp+200]
-	pop	rdi
-	pop	rbp
-	ret	0
-??0binary_tree@@QEAA@XZ ENDP				; binary_tree::binary_tree
 _TEXT	ENDS
 ; Function compile flags: /Odtp /RTCsu /ZI
 ; File C:\Users\shtuk\Desktop\Files\EquationStringParser\EquationStringParser\tree_builder.h
@@ -28393,7 +28717,7 @@ tv77 = 344
 this$ = 384
 ??1binary_tree@@QEAA@XZ PROC				; binary_tree::~binary_tree, COMDAT
 
-; 25   : 	{
+; 66   : 	{
 
 $LN8:
 	mov	QWORD PTR [rsp+8], rcx
@@ -28404,7 +28728,7 @@ $LN8:
 	lea	rcx, OFFSET FLAT:__3F6EDB1A_tree_builder@h
 	call	__CheckForDebuggerJustMyCode
 
-; 26   : 		for (auto n : nodes)
+; 67   : 		for (auto n : nodes)
 
 	mov	rax, QWORD PTR this$[rbp]
 	mov	QWORD PTR <range>$L0$1[rbp], rax
@@ -28427,8 +28751,8 @@ $LN4@binary_tre:
 	mov	rax, QWORD PTR [rax]
 	mov	QWORD PTR n$4[rbp], rax
 
-; 27   : 		{
-; 28   : 			delete n;
+; 68   : 		{
+; 69   : 			delete n;
 
 	mov	rax, QWORD PTR n$4[rbp]
 	mov	QWORD PTR $T5[rbp], rax
@@ -28443,19 +28767,19 @@ $LN6@binary_tre:
 	mov	QWORD PTR tv77[rbp], 0
 $LN7@binary_tre:
 
-; 29   : 		}
+; 70   : 		}
 
 	jmp	SHORT $LN2@binary_tre
 $LN3@binary_tre:
 
-; 30   : 
-; 31   : 		nodes.clear();
+; 71   : 
+; 72   : 		nodes.clear();
 
 	mov	rax, QWORD PTR this$[rbp]
 	mov	rcx, rax
 	call	?clear@?$vector@PEAVnode@@V?$allocator@PEAVnode@@@std@@@std@@QEAAXXZ ; std::vector<node *,std::allocator<node *> >::clear
 
-; 32   : 	}
+; 73   : 	}
 
 	mov	rax, QWORD PTR this$[rbp]
 	mov	rcx, rax
@@ -28465,6 +28789,240 @@ $LN3@binary_tre:
 	pop	rbp
 	ret	0
 ??1binary_tree@@QEAA@XZ ENDP				; binary_tree::~binary_tree
+_TEXT	ENDS
+; Function compile flags: /Odtp /RTCsu /ZI
+; File C:\Users\shtuk\Desktop\Files\EquationStringParser\EquationStringParser\tree_builder.h
+;	COMDAT ?mutate@binary_tree@@QEAAXXZ
+_TEXT	SEGMENT
+numberOfConstants$ = 4
+<range>$L0$1 = 40
+<begin>$L0$2 = 72
+<end>$L0$3 = 104
+n$4 = 136
+rn$ = 164
+count$ = 196
+<range>$L1$5 = 232
+<begin>$L1$6 = 264
+<end>$L1$7 = 296
+n$8 = 328
+l$9 = 360
+$T10 = 584
+$T11 = 648
+tv140 = 664
+this$ = 704
+?mutate@binary_tree@@QEAAXXZ PROC			; binary_tree::mutate, COMDAT
+
+; 36   : 	{
+
+$LN13:
+	mov	QWORD PTR [rsp+8], rcx
+	push	rbp
+	push	rdi
+	sub	rsp, 712				; 000002c8H
+	lea	rbp, QWORD PTR [rsp+32]
+	lea	rcx, OFFSET FLAT:__3F6EDB1A_tree_builder@h
+	call	__CheckForDebuggerJustMyCode
+
+; 37   : 		int numberOfConstants = 0;
+
+	mov	DWORD PTR numberOfConstants$[rbp], 0
+
+; 38   : 
+; 39   : 		for (node* n : nodes)
+
+	mov	rax, QWORD PTR this$[rbp]
+	mov	QWORD PTR <range>$L0$1[rbp], rax
+	mov	rcx, QWORD PTR <range>$L0$1[rbp]
+	call	?_Unchecked_begin@?$vector@PEAVnode@@V?$allocator@PEAVnode@@@std@@@std@@QEAAPEAPEAVnode@@XZ ; std::vector<node *,std::allocator<node *> >::_Unchecked_begin
+	mov	QWORD PTR <begin>$L0$2[rbp], rax
+	mov	rcx, QWORD PTR <range>$L0$1[rbp]
+	call	?_Unchecked_end@?$vector@PEAVnode@@V?$allocator@PEAVnode@@@std@@@std@@QEAAPEAPEAVnode@@XZ ; std::vector<node *,std::allocator<node *> >::_Unchecked_end
+	mov	QWORD PTR <end>$L0$3[rbp], rax
+	jmp	SHORT $LN4@mutate
+$LN2@mutate:
+	mov	rax, QWORD PTR <begin>$L0$2[rbp]
+	add	rax, 8
+	mov	QWORD PTR <begin>$L0$2[rbp], rax
+$LN4@mutate:
+	mov	rax, QWORD PTR <end>$L0$3[rbp]
+	cmp	QWORD PTR <begin>$L0$2[rbp], rax
+	je	SHORT $LN3@mutate
+	mov	rax, QWORD PTR <begin>$L0$2[rbp]
+	mov	rax, QWORD PTR [rax]
+	mov	QWORD PTR n$4[rbp], rax
+
+; 40   : 		{
+; 41   : 			if (n->IsConstant())
+
+	mov	rcx, QWORD PTR n$4[rbp]
+	call	?IsConstant@node@@QEBA_NXZ		; node::IsConstant
+	movzx	eax, al
+	test	eax, eax
+	je	SHORT $LN8@mutate
+
+; 42   : 				numberOfConstants++;
+
+	mov	eax, DWORD PTR numberOfConstants$[rbp]
+	inc	eax
+	mov	DWORD PTR numberOfConstants$[rbp], eax
+$LN8@mutate:
+
+; 43   : 		}
+
+	jmp	SHORT $LN2@mutate
+$LN3@mutate:
+
+; 44   : 
+; 45   : 		int rn = rand() % numberOfConstants;
+
+	call	QWORD PTR __imp_rand
+	cdq
+	idiv	DWORD PTR numberOfConstants$[rbp]
+	mov	eax, edx
+	mov	DWORD PTR rn$[rbp], eax
+
+; 46   : 
+; 47   : 		int count = 0;
+
+	mov	DWORD PTR count$[rbp], 0
+
+; 48   : 
+; 49   : 		for (node* n : nodes)
+
+	mov	rax, QWORD PTR this$[rbp]
+	mov	QWORD PTR <range>$L1$5[rbp], rax
+	mov	rcx, QWORD PTR <range>$L1$5[rbp]
+	call	?_Unchecked_begin@?$vector@PEAVnode@@V?$allocator@PEAVnode@@@std@@@std@@QEAAPEAPEAVnode@@XZ ; std::vector<node *,std::allocator<node *> >::_Unchecked_begin
+	mov	QWORD PTR <begin>$L1$6[rbp], rax
+	mov	rcx, QWORD PTR <range>$L1$5[rbp]
+	call	?_Unchecked_end@?$vector@PEAVnode@@V?$allocator@PEAVnode@@@std@@@std@@QEAAPEAPEAVnode@@XZ ; std::vector<node *,std::allocator<node *> >::_Unchecked_end
+	mov	QWORD PTR <end>$L1$7[rbp], rax
+	jmp	SHORT $LN7@mutate
+$LN5@mutate:
+	mov	rax, QWORD PTR <begin>$L1$6[rbp]
+	add	rax, 8
+	mov	QWORD PTR <begin>$L1$6[rbp], rax
+$LN7@mutate:
+	mov	rax, QWORD PTR <end>$L1$7[rbp]
+	cmp	QWORD PTR <begin>$L1$6[rbp], rax
+	je	$LN6@mutate
+	mov	rax, QWORD PTR <begin>$L1$6[rbp]
+	mov	rax, QWORD PTR [rax]
+	mov	QWORD PTR n$8[rbp], rax
+
+; 50   : 		{
+; 51   : 			if (n->IsConstant())
+
+	mov	rcx, QWORD PTR n$8[rbp]
+	call	?IsConstant@node@@QEBA_NXZ		; node::IsConstant
+	movzx	eax, al
+	test	eax, eax
+	je	SHORT $LN9@mutate
+
+; 52   : 			{
+; 53   : 				if (count == rn)
+
+	mov	eax, DWORD PTR rn$[rbp]
+	cmp	DWORD PTR count$[rbp], eax
+	jne	SHORT $LN10@mutate
+
+; 54   : 				{
+; 55   : 					double l = randomDouble(-100.0, 100.0);
+
+	movsd	xmm2, QWORD PTR __real@4059000000000000
+	movsd	xmm1, QWORD PTR __real@c059000000000000
+	mov	rcx, QWORD PTR this$[rbp]
+	call	?randomDouble@binary_tree@@QEAANNN@Z	; binary_tree::randomDouble
+	movsd	QWORD PTR l$9[rbp], xmm0
+
+; 56   : 					n->setConstant(std::to_string(l));
+
+	lea	rax, QWORD PTR $T10[rbp]
+	mov	QWORD PTR $T11[rbp], rax
+	movsd	xmm1, QWORD PTR l$9[rbp]
+	mov	rcx, QWORD PTR $T11[rbp]
+	call	?to_string@std@@YA?AV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@1@N@Z ; std::to_string
+	mov	QWORD PTR tv140[rbp], rax
+	mov	rdx, QWORD PTR tv140[rbp]
+	mov	rcx, QWORD PTR n$8[rbp]
+	call	?setConstant@node@@QEAAXV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z ; node::setConstant
+
+; 57   : 					break;
+
+	jmp	SHORT $LN6@mutate
+$LN10@mutate:
+
+; 58   : 				}
+; 59   : 
+; 60   : 				count++;
+
+	mov	eax, DWORD PTR count$[rbp]
+	inc	eax
+	mov	DWORD PTR count$[rbp], eax
+$LN9@mutate:
+
+; 61   : 			}
+; 62   : 		}
+
+	jmp	$LN5@mutate
+$LN6@mutate:
+
+; 63   : 	}
+
+	lea	rsp, QWORD PTR [rbp+680]
+	pop	rdi
+	pop	rbp
+	ret	0
+?mutate@binary_tree@@QEAAXXZ ENDP			; binary_tree::mutate
+_TEXT	ENDS
+; Function compile flags: /Odtp /RTCsu /ZI
+; File C:\Users\shtuk\Desktop\Files\EquationStringParser\EquationStringParser\tree_builder.h
+;	COMDAT ?randomDouble@binary_tree@@QEAANNN@Z
+_TEXT	SEGMENT
+f$ = 8
+this$ = 256
+fMin$ = 264
+fMax$ = 272
+?randomDouble@binary_tree@@QEAANNN@Z PROC		; binary_tree::randomDouble, COMDAT
+
+; 30   : 	{
+
+$LN3:
+	movsd	QWORD PTR [rsp+24], xmm2
+	movsd	QWORD PTR [rsp+16], xmm1
+	mov	QWORD PTR [rsp+8], rcx
+	push	rbp
+	push	rdi
+	sub	rsp, 280				; 00000118H
+	lea	rbp, QWORD PTR [rsp+48]
+	lea	rcx, OFFSET FLAT:__3F6EDB1A_tree_builder@h
+	call	__CheckForDebuggerJustMyCode
+
+; 31   : 		double f = (double)rand() / RAND_MAX;
+
+	call	QWORD PTR __imp_rand
+	cvtsi2sd xmm0, eax
+	divsd	xmm0, QWORD PTR __real@40dfffc000000000
+	movsd	QWORD PTR f$[rbp], xmm0
+
+; 32   : 		return fMin + f * (fMax - fMin);
+
+	movsd	xmm0, QWORD PTR fMax$[rbp]
+	subsd	xmm0, QWORD PTR fMin$[rbp]
+	movsd	xmm1, QWORD PTR f$[rbp]
+	mulsd	xmm1, xmm0
+	movaps	xmm0, xmm1
+	movsd	xmm1, QWORD PTR fMin$[rbp]
+	addsd	xmm1, xmm0
+	movaps	xmm0, xmm1
+
+; 33   : 	}
+
+	lea	rsp, QWORD PTR [rbp+232]
+	pop	rdi
+	pop	rbp
+	ret	0
+?randomDouble@binary_tree@@QEAANNN@Z ENDP		; binary_tree::randomDouble
 _TEXT	ENDS
 ; Function compile flags: /Odtp /RTCsu /ZI
 ; File C:\Users\shtuk\Desktop\Files\EquationStringParser\EquationStringParser\tree_builder.h
@@ -28478,7 +29036,7 @@ this$ = 352
 nodeNumber$ = 360
 ?getNodeByNumber@binary_tree@@QEAAPEAVnode@@H@Z PROC	; binary_tree::getNodeByNumber, COMDAT
 
-; 14   : 	{
+; 19   : 	{
 
 $LN7:
 	mov	DWORD PTR [rsp+16], edx
@@ -28490,7 +29048,7 @@ $LN7:
 	lea	rcx, OFFSET FLAT:__3F6EDB1A_tree_builder@h
 	call	__CheckForDebuggerJustMyCode
 
-; 15   : 		for (node* n : nodes)
+; 20   : 		for (node* n : nodes)
 
 	mov	rax, QWORD PTR this$[rbp]
 	mov	QWORD PTR <range>$L0$1[rbp], rax
@@ -28513,38 +29071,76 @@ $LN4@getNodeByN:
 	mov	rax, QWORD PTR [rax]
 	mov	QWORD PTR n$4[rbp], rax
 
-; 16   : 		{
-; 17   : 			if (n->getOperatorNumber() == nodeNumber)
+; 21   : 		{
+; 22   : 			if (n->getOperatorNumber() == nodeNumber)
 
 	mov	rcx, QWORD PTR n$4[rbp]
 	call	?getOperatorNumber@node@@QEBAHXZ	; node::getOperatorNumber
 	cmp	eax, DWORD PTR nodeNumber$[rbp]
 	jne	SHORT $LN5@getNodeByN
 
-; 18   : 				return n;
+; 23   : 				return n;
 
 	mov	rax, QWORD PTR n$4[rbp]
 	jmp	SHORT $LN1@getNodeByN
 $LN5@getNodeByN:
 
-; 19   : 		}
+; 24   : 		}
 
 	jmp	SHORT $LN2@getNodeByN
 $LN3@getNodeByN:
 
-; 20   : 
-; 21   : 		return NULL;
+; 25   : 
+; 26   : 		return NULL;
 
 	xor	eax, eax
 $LN1@getNodeByN:
 
-; 22   : 	}
+; 27   : 	}
 
 	lea	rsp, QWORD PTR [rbp+328]
 	pop	rdi
 	pop	rbp
 	ret	0
 ?getNodeByNumber@binary_tree@@QEAAPEAVnode@@H@Z ENDP	; binary_tree::getNodeByNumber
+_TEXT	ENDS
+; Function compile flags: /Odtp /RTCsu /ZI
+; File C:\Users\shtuk\Desktop\Files\EquationStringParser\EquationStringParser\tree_builder.h
+;	COMDAT ??0binary_tree@@QEAA@XZ
+_TEXT	SEGMENT
+this$ = 224
+??0binary_tree@@QEAA@XZ PROC				; binary_tree::binary_tree, COMDAT
+
+; 13   : 	binary_tree()
+
+$LN4:
+	mov	QWORD PTR [rsp+8], rcx
+	push	rbp
+	push	rdi
+	sub	rsp, 232				; 000000e8H
+	lea	rbp, QWORD PTR [rsp+32]
+	lea	rcx, OFFSET FLAT:__3F6EDB1A_tree_builder@h
+	call	__CheckForDebuggerJustMyCode
+	mov	rax, QWORD PTR this$[rbp]
+	mov	rcx, rax
+	call	??0?$vector@PEAVnode@@V?$allocator@PEAVnode@@@std@@@std@@QEAA@XZ ; std::vector<node *,std::allocator<node *> >::vector<node *,std::allocator<node *> >
+
+; 14   : 	{
+; 15   : 		srand((unsigned)time(0));
+
+	xor	ecx, ecx
+	call	time
+	mov	ecx, eax
+	call	QWORD PTR __imp_srand
+
+; 16   : 	}
+
+	mov	rax, QWORD PTR this$[rbp]
+	lea	rsp, QWORD PTR [rbp+200]
+	pop	rdi
+	pop	rbp
+	ret	0
+??0binary_tree@@QEAA@XZ ENDP				; binary_tree::binary_tree
 _TEXT	ENDS
 ; Function compile flags: /Odtp /RTCsu /ZI
 ; File C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.29.30133\include\xmemory

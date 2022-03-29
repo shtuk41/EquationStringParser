@@ -10,6 +10,11 @@ struct binary_tree
 {
 	std::vector<node*> nodes;
 
+	binary_tree()
+	{
+		srand((unsigned)time(0));
+	}
+
 	node *getNodeByNumber(int nodeNumber)
 	{
 		for (node* n : nodes)
@@ -19,6 +24,42 @@ struct binary_tree
 		}
 
 		return NULL;
+	}
+
+	double randomDouble(double fMin, double fMax)
+	{
+		double f = (double)rand() / RAND_MAX;
+		return fMin + f * (fMax - fMin);
+	}
+
+	void mutate()
+	{
+		int numberOfConstants = 0;
+
+		for (node* n : nodes)
+		{
+			if (n->IsConstant())
+				numberOfConstants++;
+		}
+
+		int rn = rand() % numberOfConstants;
+
+		int count = 0;
+
+		for (node* n : nodes)
+		{
+			if (n->IsConstant())
+			{
+				if (count == rn)
+				{
+					double l = randomDouble(-100.0, 100.0);
+					n->setConstant(std::to_string(l));
+					break;
+				}
+
+				count++;
+			}
+		}
 	}
 
 	~binary_tree()
@@ -43,7 +84,12 @@ private:
 public:
 	tree_builder(expression *table = nullptr) : manager(table)
 	{
-		srand((unsigned)time(0));
+		srand((unsigned)time(NULL));
+	}
+
+	void mutate()
+	{
+		tree.mutate();
 	}
 
 	void generate_random_tree(int numberOfLevels, std::string mathOperators, std::string supportedVariables = std::string(""))
